@@ -1,7 +1,6 @@
 ---
 title: I just had a 10 week vacation
 date: 2015-04-09
-tags:
 published: true
 ---
 

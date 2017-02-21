@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://mauromorales.com/page/about/</loc>
+    <lastmod>2017-02-21T13:11:55+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/page/contact/</loc>
+    <lastmod>2017-02-21T13:08:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2016/01/25/machinery-1-17-inspecting-ubuntu-1404-systems/</loc>
+    <lastmod>2016-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/12/19/my-first-hackweek-was-all-about-shipping/</loc>
+    <lastmod>2015-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/10/15/dockerizing-your-infrastructure-with-machinery/</loc>
+    <lastmod>2015-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/10/08/ally-skills-workshop/</loc>
+    <lastmod>2015-10-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/09/10/test-drive-machinery-using-a-docker-container/</loc>
+    <lastmod>2015-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/08/11/installing-machinery/</loc>
+    <lastmod>2015-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/06/26/run-opensuse-13-2-in-linode/</loc>
+    <lastmod>2015-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/04/16/the-40000-dollar-checklist/</loc>
+    <lastmod>2015-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/04/09/i-just-had-a-10-week-vacation/</loc>
+    <lastmod>2015-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/04/02/getting-started-with-continuous-delivery/</loc>
+    <lastmod>2015-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/01/15/ledger-tutorial-part-1/</loc>
+    <lastmod>2015-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/01/08/hacking-your-finances/</loc>
+    <lastmod>2015-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/2015/01/01/annual-review-2014/</loc>
+    <lastmod>2015-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/page/</loc>
+    <lastmod>2017-02-21T13:11:55+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/post/</loc>
+    <lastmod>2016-01-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mauromorales.com/</loc>
+    <lastmod>2017-02-21T13:11:55+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

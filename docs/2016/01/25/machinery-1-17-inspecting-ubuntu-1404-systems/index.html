@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Machinery 1.17 - Inspecting Ubuntu 14.04 Systems &middot; Mauro Morales</title>
+        <meta name="description" content="The main feature of this minor release is the ability to inspect Ubuntu 14.04 and Docker Containers. No special configuration is required you just need to run the inspect or inspect-container command pointed at the Ubuntu host.
+In order to add this functionality we had to teach Machinery a few new tricks to handle the upstart init system and the dpkg package manager.
+Upstart Machinery can already find SysVinit and systemd services in a system.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.19-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Machinery 1.17 - Inspecting Ubuntu 14.04 Systems">
+<meta property="og:description" content="The main feature of this minor release is the ability to inspect Ubuntu 14.04 and Docker Containers. No special configuration is required you just need to run the inspect or inspect-container command pointed at the Ubuntu host.
+In order to add this functionality we had to teach Machinery a few new tricks to handle the upstart init system and the dpkg package manager.
+Upstart Machinery can already find SysVinit and systemd services in a system.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://mauromorales.com/2016/01/25/machinery-1-17-inspecting-ubuntu-1404-systems/">
+        <link rel="stylesheet" href="http://mauromorales.com/dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-10123298-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://mauromorales.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/_mauromorales">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Gitlab" title="Gitlab" href="https://gitlab.com/mauromorales">
+                                <i class="fa fa-gitlab"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/mauromorales">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://linkedin.com/in/mauromorales/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:contact@mauromorales.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Machinery 1.17 - Inspecting Ubuntu 14.04 Systems</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2016-01-25" itemprop="datePublished">Mon, Jan 25, 2016</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://google.com/&#43;XXX" itemprop="url" rel="author">Mauro Morales</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p>The main feature of this minor release is the ability to inspect Ubuntu 14.04
+and Docker Containers. No special configuration is required you just need to
+run the <code>inspect</code> or <code>inspect-container</code> command pointed at the Ubuntu host.</p>
+
+<p>In order to add this functionality we had to teach Machinery a few new tricks
+to handle the upstart init system and the dpkg package manager.</p>
+
+<h2 id="upstart">Upstart</h2>
+
+<p>Machinery can already find SysVinit and systemd services in a system. Even
+though Upstart is pretty much on it&rsquo;s way out it was the third big player in
+the init system league and being able to parse it&rsquo;s services is a great
+addition for Machinery&rsquo;s code base.</p>
+
+<p>In the case of Ubuntu 14.04 we were able to find the complete list of services
+by merging the SysV and Upstart services with the following commands:</p>
+
+<pre><code># upstart services
+/sbin/initctl show-config -e
+# sysv services
+/usr/sbin/service --status-all
+</code></pre>
+
+<p>The main takeaway for me on this topic was that there is no generic way to
+determine the default init system on a Linux distribution and that in some
+cases like in Ubuntu 14.04 and RHEL 6 they can be a mix of two.</p>
+
+<h2 id="dpkg">Dpkg</h2>
+
+<p>Ubuntu is also the first distribution that Machinery can inspect that uses the
+dpkg package manager and we had to expand the <em>packages</em>, <em>repositories</em>, <em>patterns</em>,
+<em>config-files</em>, <em>changed-managed-files</em> and <em>unmanaged-files scopes</em>.</p>
+
+<p>For the <em>packages</em> scope we get all the information from running <code>dpkg -l</code>. In
+order to differentiate rpm from deb packages we added the <em>package_system</em>
+attribute which can be &ldquo;rpm&rdquo; or &ldquo;deb&rdquo; respectively</p>
+
+<p>When working on the <em>repositories</em> scope we were originally going to do the same
+but in the end differentiating by the tool used to install those packages
+proved to be a better approach. There are enough differences between zypper,
+yum and apt so we added the attribute <em>repository_system</em> which can have a
+value of &ldquo;zypp&rdquo;, &ldquo;yum&rdquo; and &ldquo;apt&rdquo; accordingly.</p>
+
+<p>In the <em>patterns</em> scope we introduced a dependency to the &ldquo;tasksel&rdquo; command. When
+present in a system and if there are any tasks installed they get listed using
+the <code>tasksel --list-tasks</code> command.</p>
+
+<p>The <em>config-files</em> and <em>changed-managed-files</em> scopes depend deeply on the
+information provided by the package. In order determine what has changed we
+rely on the checksums provided by the package maintainer. Unfortunately many
+packages don&rsquo;t provide the checksums for every one of their files. This means
+that if a configuration or managed file that lacks it&rsquo;s checksum was changed
+after being installed Machinery won&rsquo;t be able to detect this change.</p>
+
+<h2 id="updating">Updating</h2>
+
+<p>If you&rsquo;ve installed Machinery as a package using zypper all you need to do is
+update it. (Builds on openSUSE Leap and SLE take longer to be available)</p>
+
+<pre><code>sudo zypper up machinery
+</code></pre>
+
+<p>If you&rsquo;ve installed Machinery as a gem</p>
+
+<pre><code>gem update machinery-tool
+</code></pre>
+
+<p>Finally update all your system descriptions by running</p>
+
+<pre><code> machinery upgrade-format --all
+</code></pre>
+
+<p>Learn more about your systems with Machinery!</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Machinery%201.17%20-%20Inspecting%20Ubuntu%2014.04%20Systems&url=http%3a%2f%2fmauromorales.com%2f2016%2f01%2f25%2fmachinery-1-17-inspecting-ubuntu-1404-systems%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fmauromorales.com%2f2016%2f01%2f25%2fmachinery-1-17-inspecting-ubuntu-1404-systems%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fmauromorales.com%2f2016%2f01%2f25%2fmachinery-1-17-inspecting-ubuntu-1404-systems%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Machinery%201.17%20-%20Inspecting%20Ubuntu%2014.04%20Systems&url=http%3a%2f%2fmauromorales.com%2f2016%2f01%2f25%2fmachinery-1-17-inspecting-ubuntu-1404-systems%2f&summary="
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'mauromoralesdotcom';
+    var disqus_identifier = 'http:\/\/mauromorales.com\/2016\/01\/25\/machinery-1-17-inspecting-ubuntu-1404-systems\/';
+    var disqus_title = 'Machinery 1.17 - Inspecting Ubuntu 14.04 Systems';
+    var disqus_url = 'http:\/\/mauromorales.com\/2016\/01\/25\/machinery-1-17-inspecting-ubuntu-1404-systems\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://mauromorales.com/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="http://mauromorales.com/js/jquery.fitvids.js"></script>
+        <script src="http://mauromorales.com/js/scripts.js"></script>
+    </body>
+</html>
+

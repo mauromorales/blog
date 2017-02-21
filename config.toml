@@ -2,6 +2,8 @@ languageCode = "en-us"
 title = "mauromorales.com"
 baseURL = "http://mauromorales.com/"
 
+publishDir = "docs"
+
 theme = "ghostwriter"
 copyright = "Mauro Morales"
 googleAnalytics = "UA-10123298-1"

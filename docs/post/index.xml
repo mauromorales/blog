@@ -1,0 +1,1333 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on mauromorales.com</title>
+    <link>http://mauromorales.com/post/index.xml</link>
+    <description>Recent content in Posts on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <lastBuildDate>Mon, 25 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://mauromorales.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Machinery 1.17 - Inspecting Ubuntu 14.04 Systems</title>
+      <link>http://mauromorales.com/2016/01/25/machinery-1-17-inspecting-ubuntu-1404-systems/</link>
+      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2016/01/25/machinery-1-17-inspecting-ubuntu-1404-systems/</guid>
+      <description>
+
+&lt;p&gt;The main feature of this minor release is the ability to inspect Ubuntu 14.04
+and Docker Containers. No special configuration is required you just need to
+run the &lt;code&gt;inspect&lt;/code&gt; or &lt;code&gt;inspect-container&lt;/code&gt; command pointed at the Ubuntu host.&lt;/p&gt;
+
+&lt;p&gt;In order to add this functionality we had to teach Machinery a few new tricks
+to handle the upstart init system and the dpkg package manager.&lt;/p&gt;
+
+&lt;h2 id=&#34;upstart&#34;&gt;Upstart&lt;/h2&gt;
+
+&lt;p&gt;Machinery can already find SysVinit and systemd services in a system. Even
+though Upstart is pretty much on it&amp;rsquo;s way out it was the third big player in
+the init system league and being able to parse it&amp;rsquo;s services is a great
+addition for Machinery&amp;rsquo;s code base.&lt;/p&gt;
+
+&lt;p&gt;In the case of Ubuntu 14.04 we were able to find the complete list of services
+by merging the SysV and Upstart services with the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# upstart services
+/sbin/initctl show-config -e
+# sysv services
+/usr/sbin/service --status-all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The main takeaway for me on this topic was that there is no generic way to
+determine the default init system on a Linux distribution and that in some
+cases like in Ubuntu 14.04 and RHEL 6 they can be a mix of two.&lt;/p&gt;
+
+&lt;h2 id=&#34;dpkg&#34;&gt;Dpkg&lt;/h2&gt;
+
+&lt;p&gt;Ubuntu is also the first distribution that Machinery can inspect that uses the
+dpkg package manager and we had to expand the &lt;em&gt;packages&lt;/em&gt;, &lt;em&gt;repositories&lt;/em&gt;, &lt;em&gt;patterns&lt;/em&gt;,
+&lt;em&gt;config-files&lt;/em&gt;, &lt;em&gt;changed-managed-files&lt;/em&gt; and &lt;em&gt;unmanaged-files scopes&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the &lt;em&gt;packages&lt;/em&gt; scope we get all the information from running &lt;code&gt;dpkg -l&lt;/code&gt;. In
+order to differentiate rpm from deb packages we added the &lt;em&gt;package_system&lt;/em&gt;
+attribute which can be &amp;ldquo;rpm&amp;rdquo; or &amp;ldquo;deb&amp;rdquo; respectively&lt;/p&gt;
+
+&lt;p&gt;When working on the &lt;em&gt;repositories&lt;/em&gt; scope we were originally going to do the same
+but in the end differentiating by the tool used to install those packages
+proved to be a better approach. There are enough differences between zypper,
+yum and apt so we added the attribute &lt;em&gt;repository_system&lt;/em&gt; which can have a
+value of &amp;ldquo;zypp&amp;rdquo;, &amp;ldquo;yum&amp;rdquo; and &amp;ldquo;apt&amp;rdquo; accordingly.&lt;/p&gt;
+
+&lt;p&gt;In the &lt;em&gt;patterns&lt;/em&gt; scope we introduced a dependency to the &amp;ldquo;tasksel&amp;rdquo; command. When
+present in a system and if there are any tasks installed they get listed using
+the &lt;code&gt;tasksel --list-tasks&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;config-files&lt;/em&gt; and &lt;em&gt;changed-managed-files&lt;/em&gt; scopes depend deeply on the
+information provided by the package. In order determine what has changed we
+rely on the checksums provided by the package maintainer. Unfortunately many
+packages don&amp;rsquo;t provide the checksums for every one of their files. This means
+that if a configuration or managed file that lacks it&amp;rsquo;s checksum was changed
+after being installed Machinery won&amp;rsquo;t be able to detect this change.&lt;/p&gt;
+
+&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve installed Machinery as a package using zypper all you need to do is
+update it. (Builds on openSUSE Leap and SLE take longer to be available)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zypper up machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve installed Machinery as a gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem update machinery-tool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally update all your system descriptions by running&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; machinery upgrade-format --all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Learn more about your systems with Machinery!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My First Hackweek Was All about Shippping</title>
+      <link>http://mauromorales.com/2015/12/19/my-first-hackweek-was-all-about-shipping/</link>
+      <pubDate>Sat, 19 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/12/19/my-first-hackweek-was-all-about-shipping/</guid>
+      <description>&lt;p&gt;Last week I had the chance to participate in my first &lt;a href=&#34;https://hackweek.suse.com/&#34;&gt;Hackweek&lt;/a&gt;. I never had
+such an experience in any other company I&amp;rsquo;ve ever worked for and between my
+colleagues&amp;rsquo; reports about previous experiences and my own expectations I was
+very excited to see what was all the fuzz about.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;These type of events are not unique to SUSE, as a matter of fact Twitter and
+a bunch of other companies were also having their Hackweeks at the same time and
+I&amp;rsquo;m glad this is the case because after having the chance to participate in one
+I realize it&amp;rsquo;s a great way to promote creativity.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A hackweek is basically a week were you get to work on anything you want to
+work on. You are not expected to deliver anything but instead encouraged to
+experiment and explore with anything you think is worth spending time on.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In order to make the most out of Hackweek I decided to join a project and not
+start one of my own so I could do some pairing. This kind of interactions always
+make it a lot of fun for me plus I get to learn a ton.  That&amp;rsquo;s how I joined
+Cornelius Schumacher to work on &lt;a href=&#34;https://github.com/cornelius/yes_ship_it&#34;&gt;Yes Ship It!&lt;/a&gt; This is a project he had
+already started on his own so we were not doing everything from scratch.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The approach of &lt;code&gt;yes_ship_it&lt;/code&gt; is different from the typical release script. It
+doesn&amp;rsquo;t define a series of steps which are executed to make a release. It
+defines a sequence of assertions about the release, which then are checked and
+enforced.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The first thing we decided to do together was a Rails App which allows you to
+track successful software releases. Since it was going to be 100% related to
+&lt;code&gt;Yes Ship It!&lt;/code&gt; we decided to call it &lt;a href=&#34;https://yes-it-shipped.herokuapp.com/&#34;&gt;Yes It Shipped!&lt;/a&gt;. Let me show you how
+trivial it is to add it to a project like the &lt;a href=&#34;https://rubygems.org/gems/formstack-api&#34;&gt;formstack-api gem&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install the &lt;code&gt;yes_ship_it&lt;/code&gt; gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gem install yes_ship_it
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a &lt;code&gt;yes_ship_it.conf&lt;/code&gt; file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yes_ship_it init
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Release!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yes_ship_it
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;By default &lt;code&gt;yes_ship_it&lt;/code&gt; will check if:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;you are in the right release branch (by default master) and the code was
+ pushed.&lt;/li&gt;
+&lt;li&gt;the working directory is not missing to commit anything.&lt;/li&gt;
+&lt;li&gt;the version was update&lt;/li&gt;
+&lt;li&gt;the changelog was updated&lt;/li&gt;
+&lt;li&gt;a tag was added and published&lt;/li&gt;
+&lt;li&gt;a new version of the gem was built and published&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The aim is to make it as generic as possible so you can adapt it to &lt;strong&gt;any&lt;/strong&gt; project you have. For starters you can remmove any check in the process and soon enough you will be able to add checks of your own.&lt;/p&gt;
+
+&lt;p&gt;What I like the most about it is that I can run &lt;code&gt;yes_ship_it&lt;/code&gt; at any time.
+I don&amp;rsquo;t need to remember or make sure what was the last step I did because
+that&amp;rsquo;s exactly what it will do for me.&lt;/p&gt;
+
+&lt;p&gt;What do you think? Leave your comments below and remember to &lt;strong&gt;release early
+and release often&lt;/strong&gt;!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing Your Infrastructure with Machinery</title>
+      <link>http://mauromorales.com/2015/10/15/dockerizing-your-infrastructure-with-machinery/</link>
+      <pubDate>Thu, 15 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/10/15/dockerizing-your-infrastructure-with-machinery/</guid>
+      <description>
+
+&lt;p&gt;Docker offers to make it easy to deploy applications no matter what you
+infrastructure is. The problem is that you cannot just switch from one
+technology to another overnight just because it will help you solve certain
+issues. Moving to the new technology is an issue on its own, plus there is no
+technology that doesn&amp;rsquo;t come with its own issues. With Machinery we want to help
+you make the transition from VMs to containers as smooth as possible.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This post was originally delivered as a presentation in LinuxCon Dublin 2015.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s assume you have a server running a web application that uses Rails, Apache
+and MariaDB. We will use Machinery to create a System Description from this
+server which we will manually review and then allow machinery to automatically
+detect the respective workloads. Finally we will use machinery to verify that
+the see the differences between the original system and the resulting
+containers.&lt;/p&gt;
+
+&lt;p&gt;On my case I will use &lt;a href=&#34;http://suse.github.io/Portus/&#34;&gt;Portus&lt;/a&gt; as my Rails
+application.&lt;/p&gt;
+
+&lt;p&gt;Our work flow will look more or less like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;dockerizing-your-infrastructure-with-machinery/workflow.png&#34; alt=&#34;Work flow&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-a-system-description&#34;&gt;Creating a system description&lt;/h2&gt;
+
+&lt;p&gt;First of all you will need to make sure you can access the server without
+requiring a password by copying your ssh keys into the server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh-copy-id root@192.168.1.100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is required because machinery will open an ssh connection and run a set of
+commands in order to evaluate the information inside the server. Then go ahead
+and inspect the server in order to create a system description.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery inspect --name portus --extract-files 192.168.1.100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The option &lt;code&gt;--name&lt;/code&gt; is the name we want to give to our system description. The
+option &lt;code&gt;--extract-files&lt;/code&gt; will make a copy of every file except those that are
+the default from an RPM package.&lt;/p&gt;
+
+&lt;p&gt;Once machinery has finished a folder named &lt;code&gt;wordpress&lt;/code&gt; will be created inside
+&lt;code&gt;/home/USERNAME/.machinery&lt;/code&gt;. If you have a pick into this folder you will find
+a file called &lt;code&gt;manifest.json&lt;/code&gt; which is the physical representation of the system
+description and a &lt;code&gt;files&lt;/code&gt; directory containing the extracted files.&lt;/p&gt;
+
+&lt;p&gt;You can easily open the system description with your favorite text editor but
+machinery also provides a &lt;code&gt;show&lt;/code&gt; command for easy access.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery show portus --html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The additional &lt;code&gt;--html&lt;/code&gt; option will tell machinery to start a web server on your
+local machine which will help us have a more interactive look about how this
+server has been set up. By omitting this option you will get access to the same
+information as text through the CLI.&lt;/p&gt;
+
+&lt;p&gt;Your default browser will open up with all the information about the wordpress
+system description. From here you can manually see in detail every configuration
+file, package and service that was running in order to write your Dockerfile.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;dockerizing-your-infrastructure-with-machinery/html-view.png&#34; alt=&#34;HTML View&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This feature on its own will help you out a lot because you can translate all
+this information not only into a Dockerfile but also into a configuration
+management system.&lt;/p&gt;
+
+&lt;h2 id=&#34;containerizing&#34;&gt;Containerizing&lt;/h2&gt;
+
+&lt;p&gt;For the particular case of Rails (using MariaDB and Apache2) we&amp;rsquo;ve implemented
+a really nice feature into machinery that will allow you to only run a command
+and get the Dockerfiles created for you and also the docker-compose files so you
+can orchestrate your application once it has been containerized.&lt;/p&gt;
+
+&lt;p&gt;In order to do this you need to tell machinery to containerize a system
+description whose files have been extracted (in our case the wordpress system
+description)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery containerize --output-dir /tmp/containers portus
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The required &lt;code&gt;--output-dir&lt;/code&gt; tells machinery where you want your containerized
+version of the server to be saved.&lt;/p&gt;
+
+&lt;p&gt;Now we can go to &lt;code&gt;/tmp/containers/portus&lt;/code&gt; and have a look. Machinery has
+created a set of files for us to run a containerized version of our application.
+The details on how to set it up and get it running will be inside the
+&lt;code&gt;README.md&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;The first thing we need to do is to run the setup script.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;./setup.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This script is unique depending on the application that was containerized. In
+the case of Portus it sets up a database container so that our web container can
+connect to it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker-compose up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker compose will start an instance of all the required containers. For Portus
+this means a web, a db and a registry container and allow you to access them
+from your local machinery through port 3000.&lt;/p&gt;
+
+&lt;p&gt;Voila! You just got yourself a containerized version of your application. How
+cool is that?&lt;/p&gt;
+
+&lt;h2 id=&#34;introspection&#34;&gt;Introspection&lt;/h2&gt;
+
+&lt;p&gt;Now this sound very nice but once you&amp;rsquo;ve done all this (specially if you are
+writing your own Dockerfiles or CMS recipes, modules, etc) you might want to
+check what is inside your resulting containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery inspect-container portus_db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point I could just &lt;code&gt;show&lt;/code&gt; the &lt;code&gt;portus_db&lt;/code&gt; system description and have
+a look if everything is the way I expect it to be but we can go one step further
+and compare it to the &lt;code&gt;portus&lt;/code&gt; system description. This way I can make sure
+what the differences are between the container and the VM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery compare portus portus_db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I could have added the &lt;code&gt;--html&lt;/code&gt; option but I won&amp;rsquo;t so you can see the cli
+view of machinery. It was designed to play well with your other *nix commands
+so you could easily do something like this, to determine if there is
+a difference in the MariaDB package.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;If there were no differences machinery would ommit this information. For this
+reason I&amp;rsquo;ve created a contianer with a different MariaDB version&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery compare portus portus_db --no-pager | grep mariadb
+* mariadb (version: 10.0.21 &amp;lt;&amp;gt; 10.0.20)
+* mariadb-client (version: 10.0.21 &amp;lt;&amp;gt; 10.0.20)
+* mariadb-errormessages (version: 10.0.21 &amp;lt;&amp;gt; 10.0.20)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can easily spot the differences here. Now it&amp;rsquo;s up to you to change your
+Dockerfile or CMS files in order to add the right version of the package you&amp;rsquo;d
+like to install.&lt;/p&gt;
+
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;As you can see Machinery can be very useful to start deploying your applications
+as docker containers. Inspect an existing system and understand how it was
+configured using the &lt;code&gt;inspect&lt;/code&gt; and &lt;code&gt;show&lt;/code&gt; commands respectively. Write your
+Dockerfiles and build your docker images which you can then also inspect and
+compare to the original system using the &lt;code&gt;inspect-container&lt;/code&gt; and &lt;code&gt;compare&lt;/code&gt;
+commands.&lt;/p&gt;
+
+&lt;p&gt;While doing this remember to have a lot of fun and share back how you used
+machinery in your own project.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ally Skills Workshop Review</title>
+      <link>http://mauromorales.com/2015/10/08/ally-skills-workshop/</link>
+      <pubDate>Thu, 08 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/10/08/ally-skills-workshop/</guid>
+      <description>&lt;p&gt;Last week I had the chance to attend the &lt;a href=&#34;http://adainitiative.org/continue-our-work/workshops-and-training/&#34;&gt;Ally Skills
+Workshop&lt;/a&gt;
+with &lt;a href=&#34;https://twitter.com/vaurorapub&#34;&gt;Valerie Aurora&lt;/a&gt; and can&amp;rsquo;t recommend it
+enough. This was an enlightening experience on learning how to support women in
+their workplaces and communities and it should be given at every tech event or
+better yet be part of the training in tech companies.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;Valerie is a very cool person. She presented herself very modestly but after
+reading more about her I think she could have bragged much more about her
+development skills. She gave a 30 minute introduction on the class and put us in
+groups so we could work on multiple scenarios.&lt;/p&gt;
+
+&lt;p&gt;Each scenario was about real life encounters that women have had at their
+workplaces and made them feel uncomfortable. We as men got the chance to express
+how we think we should deal with the situation in order to give our support.&lt;/p&gt;
+
+&lt;p&gt;There were also women in our groups which made everything more realistic because
+they could give us immediate feedback and share similar experiences. Once we
+were done we would share back with Valerie and she would give us additional
+feedback or correct us when necessary.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve always felt happier and more productive when working in teams were people
+respect one another and I believe this kind of workshop provides the necessary
+tools and hands on experience to build such environments for women.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Test Drive Machinery Using a Docker Container</title>
+      <link>http://mauromorales.com/2015/09/10/test-drive-machinery-using-a-docker-container/</link>
+      <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/09/10/test-drive-machinery-using-a-docker-container/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;http://mauromorales.com/blogs/installing-machinery/&#34;&gt;last post&lt;/a&gt; I shared how to install Machinery. The process assumes that
+you are running openSUSE 13.2 but this of course might not be the case. You
+might be running a different Linux distro or even another OS. That&amp;rsquo;s were Docker
+comes very handy. In this post I will show you how to easily test drive
+Machinery on a container.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;Machinery will save all its data in a &lt;code&gt;.machinery&lt;/code&gt; folder at your home
+directory. In order to be valuable, this data needs to persist after you kill
+your Docker containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;mkdir -p ~/.machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can pull the image from the Docker Hub&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker pull mauromorales/machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the image is in your system all we need to do is to start a container every
+time we want to run machinery.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ docker run -ti \
+&amp;gt; -v ${HOME}/.machinery:/root/.machinery \
+&amp;gt; -v ${HOME}.ssh:/root/.ssh \
+&amp;gt; mauromorales/machinery  /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we are telling docker to start a container in &lt;code&gt;-ti&lt;/code&gt; interactive mode with
+tty and to &lt;code&gt;-v&lt;/code&gt; map a volume from the folder we just created to the
+&lt;code&gt;/root/.machinery&lt;/code&gt; this is root&amp;rsquo;s home directory because root is running
+Machinery inside our container. Additionally we will also map our &lt;code&gt;.ssh&lt;/code&gt; folder
+so machinery can use your ssh keys to access the remote servers (if you don&amp;rsquo;t
+want to share this folder with your container just map it to a different
+directory and generate new keys) &lt;code&gt;mauromorales/machinery&lt;/code&gt; specifies the image we
+downloaded and finally we run bash.&lt;/p&gt;
+
+&lt;p&gt;Once your container has started you can start using Machinery :) happy hacking!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installing Machinery</title>
+      <link>http://mauromorales.com/2015/08/11/installing-machinery/</link>
+      <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/08/11/installing-machinery/</guid>
+      <description>&lt;p&gt;For the past three months I&amp;rsquo;ve been working on a really cool tool called
+&lt;a href=&#34;http://machinery-project.org&#34;&gt;Machinery&lt;/a&gt; and I&amp;rsquo;d like to share some of the neat things you can do with it.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;In this first post I&amp;rsquo;ll show you how to install Machinery on &lt;a href=&#34;http://mauromorales.com/blog/run-opensuse-13-2-in-linode&#34;&gt;openSUSE
+13.2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;First you need to add the &lt;code&gt;systemsmanagement&lt;/code&gt; repo to your system. You can
+easily do it with zypper running the following command as root:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;zypper ar -f http://r.opensu.se/systemsmanagement:machinery/13.2 \
+systemsmanagement
+zypper refresh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;You will get asked about a key for the repo. At this point you need to trust
+temporarily or trust always.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Immediatelly afterwards we should be able to install Machinery by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;zypper in machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;When asked if you want to install the respective packages you&amp;rsquo;ll need to answer
+with a &amp;ldquo;y&amp;rdquo; (yes)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s double check that machinery was propperly installed by running the
+version option.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At the moment of writing the version is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery version 1.11.2 (system description format version 4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Learn more about how to use Machinery on the &lt;a href=&#34;https://github.com/SUSE/machinery/wiki&#34;&gt;wiki&lt;/a&gt; or by reading the man
+page.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;man machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Have fun! And if you spot any issues please let us know by opening an &lt;a href=&#34;https://github.com/SUSE/machinery/issues&#34;&gt;issue&lt;/a&gt;
+and if you have any questions write us to our &lt;a href=&#34;mailto:machinery@lists.suse.com&#34;&gt;mailing
+list&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Run openSUSE 13.2 in Linode</title>
+      <link>http://mauromorales.com/2015/06/26/run-opensuse-13-2-in-linode/</link>
+      <pubDate>Fri, 26 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/06/26/run-opensuse-13-2-in-linode/</guid>
+      <description>&lt;p&gt;Linode is one of my favorite VPS providers out there. One of the reasons why
+I like them is because they make it extremely easy to run openSUSE.  This post
+is a quick tutorial on how to get you started.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;The first time you log in you will be presented with the different Linode plans.
+And the Location where your server will reside.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/linode-plans.png&#34; alt=&#34;1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll choose the smallest plan&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/linode-1024.png&#34; alt=&#34;2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you see your Linode listed, click on it&amp;rsquo;s name&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/list-of-linodes.png&#34; alt=&#34;3&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now click on &amp;ldquo;Deploy an image&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/deploy-an-image.png&#34; alt=&#34;4&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In there we will select openSUSE 13.2, the amount of space in disk. You can
+leave the defaults which will choose for the full disk size with a 256MB swap
+partition. Choose your password and click Deploy.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/select-opensuse.png&#34; alt=&#34;5&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This will take a bit but as soon as it&amp;rsquo;s done you will be able to Boot your
+machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/boot-your-linode.png&#34; alt=&#34;6&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally click on the &amp;ldquo;Remote Access&amp;rdquo; tab so you can see different options to log
+into your machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/remote-access.png&#34; alt=&#34;7&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I personally like to ssh in from my favorite terminal app&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh root@10.0.0.10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will be welcomed by openSUSE with the following message:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Have a lot of fun...
+linux:~ #
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you can play with your new openSUSE 13.2 box. Enjoy!&lt;/p&gt;
+
+&lt;p&gt;BTW if you have never considered this Linux distro, here are &lt;a href=&#34;https://sysrich.co.uk/why-opensuse/&#34;&gt;4 reasons
+why&lt;/a&gt; you will like it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The 40,000 Dollar Checklist</title>
+      <link>http://mauromorales.com/2015/04/16/the-40000-dollar-checklist/</link>
+      <pubDate>Thu, 16 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/04/16/the-40000-dollar-checklist/</guid>
+      <description>
+
+&lt;p&gt;The other day my wife and I were talking to a friend of hers and she told us how
+launching a campaign with a tiny mistake cost her company around $40K. She hated
+the fact that it could have been prevented if only she had &amp;ldquo;double checked&amp;rdquo;.
+I told her how I use checklists for deploying code to production and she
+couldn&amp;rsquo;t believe there was such a simple solution.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;I also learned this lesson the hard way. One time I was asked to generate
+a report. I wrote some SQL and hit enter. &amp;ldquo;What an idiot!&amp;rdquo; I said to myself as
+I realized I had left a TRUNCATE TABLE at the top of my script (If you are not
+familiar with SQL this means delete all the information).&lt;/p&gt;
+
+&lt;p&gt;And of course I had no backup. Luckily I was able to regenerate the information
+from different sources but not without wasting a LOT of time! After that
+I decided to use a checklist before putting anything in production, so I made
+sure I had an updated backup.&lt;/p&gt;
+
+&lt;h2 id=&#34;when-to-use-checklists&#34;&gt;When to use checklists&lt;/h2&gt;
+
+&lt;p&gt;Going through a checklist is a simple but brilliant solution used to reduce
+mistakes in Lean manufacturing, the aviation industry, some areas of medicine,
+etc. However unless you are some sort of cyborg you don&amp;rsquo;t want to systematize
+every single thing you do during your day.&lt;/p&gt;
+
+&lt;p&gt;The way I decide what goes into a checklist and what doesn&amp;rsquo;t is by making myself
+the following question&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;How high is the risk of getting this wrong?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Not every mistake will be a matter of life and death, nor every bug cost you
+thousands of dollars, but if there is a chance it will, make sure you get things
+right the first time.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-do-a-checklist&#34;&gt;How to do a checklist&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ X ] Done Item&lt;/li&gt;
+&lt;li&gt;[ _ ] Pending Item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;m serious! You can use pen and paper, a text document, a spreadsheet or some
+app like &lt;a href=&#34;https://www.wunderlist.com/&#34;&gt;Wunderlist&lt;/a&gt;. Just make sure it is simple enough that you&amp;rsquo;ll want to
+use it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>I just had a 10 week vacation</title>
+      <link>http://mauromorales.com/2015/04/09/i-just-had-a-10-week-vacation/</link>
+      <pubDate>Thu, 09 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/04/09/i-just-had-a-10-week-vacation/</guid>
+      <description>
+
+&lt;p&gt;For the past 10 weeks I&amp;rsquo;ve focused only on family, health and me. At first
+I didn&amp;rsquo;t know if I would enjoy it, find the money or even the time to do such
+task but now I realize with the proper planing it&amp;rsquo;s not as crazy as it sounds.
+Now I&amp;rsquo;m glad I did because I feel energized and more creative than when
+I started my vacation.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;h2 id=&#34;slowing-down-is-scary&#34;&gt;Slowing down is scary&lt;/h2&gt;
+
+&lt;p&gt;12 years ago I said to myself I was never going to be broke again. My family was
+going through some economical valley and I decided to get my first job. I like
+to think I&amp;rsquo;ve worked hard for that goal and for the past decade I haven&amp;rsquo;t really
+stopped hustling besides the casual 1-2 week vacation. Until last February.&lt;/p&gt;
+
+&lt;p&gt;If like me you have a hard time slowing down, make sure you plan ahead so you
+don&amp;rsquo;t get worried all the time. The idea is to rest and enjoy life. It might not
+come natural at first but with time it won&amp;rsquo;t feel wrong.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-i-did-it&#34;&gt;How I did it&lt;/h2&gt;
+
+&lt;p&gt;It all started with a job offer. I knew from previous experience that the visa
+process takes a long time. If I was ever going to try this experiment this was
+the time. This doesn&amp;rsquo;t mean that you also need to find a new job in order to
+take a long break. Maybe your business has a time of the year that is really
+slow, or your current employer would be ok giving you some unpaid leave. Think
+of what works best for you, the important thing for me was to have something
+ready to come back to.&lt;/p&gt;
+
+&lt;p&gt;The second thing was to change our lifestyle because I wasn&amp;rsquo;t going to have
+a source of income. My wife and I decided we were going to stay with my in-laws
+in order to save on rent. This also allowed us to spend time with them before
+living thousands of kilometers away.&lt;/p&gt;
+
+&lt;p&gt;Finally I made sure we had enough saved. This was not retirement, saving for
+a couple of months was not an impossible task, specially if we wouldn&amp;rsquo;t be
+spending as much! We just cut down on some expenses and used our budget wisely.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-did-i-do-during-this-time&#34;&gt;What did I do during this time?&lt;/h2&gt;
+
+&lt;p&gt;I used this break to take better care of my body. I got a medical check,
+I started exercising again and I&amp;rsquo;m getting better at having a healthy diet.
+I realize that this needs to be high on my priority list from now on, not only
+during a long break.&lt;/p&gt;
+
+&lt;p&gt;I also had quality time with my wife, her parents, my mother and brother. Family
+is very important for me and I was able to strengthen my connection with all of
+them.&lt;/p&gt;
+
+&lt;p&gt;Even though I was on vacation I didn&amp;rsquo;t stop using my computer. I actually used
+a lot of time to play around with technology I normally don&amp;rsquo;t have the time for
+but that I really like. I think this helped my creative side.&lt;/p&gt;
+
+&lt;p&gt;Reading, lots of reading. I really enjoy this me time and it helps me energize.&lt;/p&gt;
+
+&lt;h2 id=&#34;now-what&#34;&gt;Now what?&lt;/h2&gt;
+
+&lt;p&gt;Lot&amp;rsquo;s of things are happening in the weeks to come but I don&amp;rsquo;t feel stressed.
+Moving to a different country. Starting a new job. Day to day tasks happening in
+a different language. Normally I&amp;rsquo;d be super anxious about this scenario but not
+now.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t think I will be able to have a long break every time a major change
+happens in my life but now I know it&amp;rsquo;s not impossible if I wanted to. I also
+understand that building better habits is key in life.&lt;/p&gt;
+
+&lt;p&gt;If you think you need a long break I encourage you to take it. Don&amp;rsquo;t wait until
+you are burned out or a major illness hits you.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting started with Continuous Delivery</title>
+      <link>http://mauromorales.com/2015/04/02/getting-started-with-continuous-delivery/</link>
+      <pubDate>Thu, 02 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/04/02/getting-started-with-continuous-delivery/</guid>
+      <description>
+
+&lt;p&gt;More and more companies are requiring developers to understand Continuous
+Integration and Continuous Delivery but starting to implement it in your
+projects can be a bit overwhelming. Start with a simple website and soon enough
+you will feel more confident to do with more complex projects.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;h2 id=&#34;the-right-mindset&#34;&gt;The right mindset&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;TDD/BDD, CI/CD, XP, Agile, Scrum &amp;hellip;. Ahhhhh, leave me alone I just want to
+code!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Yes, all this methodologies can be a bit complicated at first, but simply
+because you are not used to them. Like a muscle you need to train them and the
+more you do so, the sooner you won&amp;rsquo;t feel like doing them is a total waste of
+time.&lt;/p&gt;
+
+&lt;p&gt;Once you have made up your mind that CD is for you, your team or your project
+then you will need to define a process and follow it. Don&amp;rsquo;t make it easy to
+break the process and before you know it you and your team will feel like fish
+in the water.&lt;/p&gt;
+
+&lt;h2 id=&#34;automate-a-simple-website-deployment&#34;&gt;Automate a simple website deployment&lt;/h2&gt;
+
+&lt;p&gt;There are many ways you can solve this problem. I will use a certain stack. If
+you don&amp;rsquo;t have experience with any of the tools, try to implement it with one
+you do have experience with.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Stack&lt;/th&gt;
+&lt;th&gt;Tool/Service&lt;/th&gt;
+&lt;th&gt;Alternatives&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;VPS&lt;/td&gt;
+&lt;td&gt;DigitalOcean&lt;/td&gt;
+&lt;td&gt;Linode or Vagrant&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Configuration Management&lt;/td&gt;
+&lt;td&gt;Ansible&lt;/td&gt;
+&lt;td&gt;Chef or Puppet&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Static site generator&lt;/td&gt;
+&lt;td&gt;Middleman&lt;/td&gt;
+&lt;td&gt;Jekyll or pure HTML&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;CI/CD Server&lt;/td&gt;
+&lt;td&gt;Semaphore&lt;/td&gt;
+&lt;td&gt;Codeship or Jenkins&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The first thing is to create a new droplet in DO (you could also do this with
+Ansible but we won&amp;rsquo;t at this tutorial). Make sure there is a &lt;strong&gt;deploy&lt;/strong&gt; user and
+to set up ssh keys for it (again something we could do with Ansible but we&amp;rsquo;ll
+leave that for another post) Setup your your domain to point to the new server&amp;rsquo;s
+IP address, I will use &amp;lsquo;example.com&amp;rsquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;ansible&#34;&gt;Ansible&lt;/h3&gt;
+
+&lt;p&gt;Create a folder for your playbook and inside of it start with a file called
+&lt;code&gt;ansible.cfg&lt;/code&gt;. There we will override the default configuration by pointing to
+a new inventory inside your playbook&amp;rsquo;s folder and specify the deploy user.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[defaults]
+hostfile=inventory
+remote_user=deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now in our &lt;code&gt;inventory&lt;/code&gt; file we specify a group called web and include our
+domain.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[web]
+example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our tasks will be defined in &lt;code&gt;simple-webserver.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;---
+- name: Simple Web Server
+  hosts: example.com
+  sudo: True
+  tasks:
+    - name: Install nginx
+      apt: pkg=nginx state=installed update_cache=true
+      notify: start nginx
+    - name: remove default nginx site
+      file: path=/etc/nginx/sites-enabled/default state=absent
+    - name: Assures project root dir exists
+      file: &amp;gt;
+        path=/srv/www/example.com
+        state=directory
+        owner=deploy
+        group=www-data
+    - name: copy nginx config file
+      template: &amp;gt;
+        src=templates/nginx.conf.j2
+        dest=/etc/nginx/sites-available/example.com
+      notify: restart nginx
+    - name: enable configuration
+      file: &amp;gt;
+        dest=/etc/nginx/sites-enabled/example.com
+        src=/etc/nginx/sites-available/example.com
+        state=link
+      notify: restart nginx
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+    - name: restart nginx
+      service: name=nginx state=restarted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In it we make reference to a template called &lt;code&gt;templates/nginx.conf.j2&lt;/code&gt; where we will
+specify a simple virtual host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;server {
+        listen *:80;
+
+        root /srv/www/example.com;
+        index index.html index.htm;
+
+        server_name example.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I&amp;rsquo;ll show you in another post how to do this same setup but with multiple
+virtual hosts in case you run multiple sites.&lt;/p&gt;
+
+&lt;p&gt;Run it by calling:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ansible-playbook simple-webserver.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;middleman&#34;&gt;Middleman&lt;/h3&gt;
+
+&lt;p&gt;Middleman has a very simple way to deploy over rsync. Just make sure you have
+the following gem in your &lt;code&gt;Gemfile&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;gem &#39;middleman-deploy&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then add something like this to your &lt;code&gt;config.rb&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;activate :deploy do |deploy|
+  deploy.method = :rsync
+  deploy.host   = &#39;example.com&#39;
+  deploy.path   = &#39;/srv/www/example.com&#39;
+  deploy.user  = &#39;deploy&#39;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Before you can deploy you need to remember to build your site. This is prone to
+errors so instead we will add a rake task in our &lt;code&gt;Rakefile&lt;/code&gt; to do this for us.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;desc &#39;Build site&#39;
+task :build do
+  `middleman build`
+end
+
+desc &#39;Deploy site&#39;
+task :deploy do
+  `middleman deploy`
+end
+
+desc &#39;Build and deploy site&#39;
+task :build_deploy =&amp;gt; [:build, :deploy] do
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;git-flow&#34;&gt;Git Flow&lt;/h3&gt;
+
+&lt;p&gt;Technically you don&amp;rsquo;t really need &lt;a href=&#34;https://github.com/nvie/gitflow&#34;&gt;git flow&lt;/a&gt; for this process but I do believe
+having a proper &lt;a href=&#34;http://news.bbc.co.uk/go/rss/-/2/hi/default.stm&#34;&gt;branching model&lt;/a&gt; is key to a successful CD environment.
+Depending on your team&amp;rsquo;s process you might want to use something else but if you
+don&amp;rsquo;t have anything defined please take a look at git flow, it might be just
+what you need.&lt;/p&gt;
+
+&lt;p&gt;For this tutorial I will oversimplify the process and just use the develop,
+master and release branches by following these three steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Commit all the desired changes into the develop branch&lt;/li&gt;
+&lt;li&gt;Create a release and add the release&amp;rsquo;s information&lt;/li&gt;
+&lt;li&gt;Merge the release into master&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let&amp;rsquo;s go through the steps in the command line. We start by adding the new
+features and committing them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git add Rakefile
+git commit -m &#39;Add rake task for easier deployment&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we create a release.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git flow release start &#39;1.0.0&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This would be a good time to test everything out. Bump the version number of
+your software (in my case 1.0.0), update the change log and do any last minute
+fixes.&lt;/p&gt;
+
+&lt;p&gt;Commit the changes and let&amp;rsquo;s wrap up this step by finishing our release.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git flow release finish &#39;1.0.0&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Try to write something significant for your message tag so you can easily refer
+to a version later on by it&amp;rsquo;s description.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git tag -n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hold your horses and don&amp;rsquo;t push your changes just yet.&lt;/p&gt;
+
+&lt;h3 id=&#34;semaphore&#34;&gt;Semaphore&lt;/h3&gt;
+
+&lt;p&gt;Add a new project from Github or Bitbucket.&lt;/p&gt;
+
+&lt;p&gt;For the build you might want to have something along the lines of:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;bundle install --path vendor/bundle
+bundle exec rake spec
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now go into the projects settings inside the &lt;em&gt;Deployment&lt;/em&gt; tab and add a server.&lt;/p&gt;
+
+&lt;p&gt;Because we are using a generic option Sempahore will need access to our server.
+Generate an SSH key and paste the private in Semaphore and the public in your
+server.&lt;/p&gt;
+
+&lt;p&gt;For the deploy commands you need to have something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh-keyscan -H -p 22 example.com &amp;gt;&amp;gt; ~/.ssh/known_hosts
+bundle exec rake build_deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;push-your-changes&#34;&gt;Push your changes&lt;/h3&gt;
+
+&lt;p&gt;Push your changes in the master branch and voilà, Semaphore will build and
+deploy your site.&lt;/p&gt;
+
+&lt;p&gt;Once you get into the habit of doing this with your website you will feel more
+confident of doing it with something like a Rails application.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions please leave them below, I&amp;rsquo;ll respond to every single
+one of them.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ledger Tutorial part 1</title>
+      <link>http://mauromorales.com/2015/01/15/ledger-tutorial-part-1/</link>
+      <pubDate>Thu, 15 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/01/15/ledger-tutorial-part-1/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://www.ledger-cli.org/&#34;&gt;Ledger&lt;/a&gt; is a great tool to keep track of your
+finances. It&amp;rsquo;s simple, fast and most important it doesn&amp;rsquo;t limit you like most
+other tools.&lt;/p&gt;
+
+&lt;p&gt;The following post is a small introduction on how to start traking your finances
+this 2015.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Installing ledger in OS X is as simple as calling a brew command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;brew install ledger
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.ledger-cli.org/download.html&#34;&gt;Here&lt;/a&gt; you can find information for
+other systems.&lt;/p&gt;
+
+&lt;h2 id=&#34;define-a-starting-point&#34;&gt;Define a starting point&lt;/h2&gt;
+
+&lt;p&gt;In order to keep track of your finances you need to start somewhere. If you are
+doing this at the beginning of the year or in the middle of it, it doesn&amp;rsquo;t
+matter. The important thing is that you have the sources of your different
+accounts and credit cards so you can migrate them to ledger.&lt;/p&gt;
+
+&lt;p&gt;I will suggest you try with your current balance today. Don&amp;rsquo;t try to get old
+data now. Picking up a new tool is already hard work, specially if you need to
+build a habit to use it. Plus once you dominate it you will be able to automate
+things and you might be able to import that data in a snap.&lt;/p&gt;
+
+&lt;p&gt;My starting point for this tutorial will be January 1st 2015. So now I go into
+every imaginary account I have and verify what is my balance up to that day.
+Once I have collected all that information I will write it down into my journal
+file from which ledger will read and generate reports.&lt;/p&gt;
+
+&lt;p&gt;Create a file called journal.dat and add the following&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;; Testing ledger CLI
+2015/01/01  Opening Balance
+  Assets:BankOne:Checking                $100.00
+  Assets:BankTwo:Savings               $2,000.00
+  Liabilities:BankOne:Mastercard        $-250.00
+  Liabilities:BankThree:Visa             $-30.00
+  Equity:Opening Balances
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 1:&lt;/strong&gt; starts with a semicolon and it&amp;rsquo;s just a comment so you don&amp;rsquo;t really need
+it but it&amp;rsquo;s very useful when you need to keep notes about a particular expense.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;You will find other ways to put comments in the
+&lt;a href=&#34;http://www.ledger-cli.org/docs.html&#34;&gt;documentation&lt;/a&gt;. Feel free to use the one
+you prefer. For consistency purposes I will use the semicolon.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 2:&lt;/strong&gt; starts with a date. This is the date from the registry we are adding.
+&lt;em&gt;Everything between this date and the next empty line will be our registry.&lt;/em&gt; The
+format is &lt;strong&gt;YYYY/MM/DD&lt;/strong&gt;. &lt;em&gt;Banks don&amp;rsquo;t always follow the same format for dates
+so be careful with this&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;After the date we see the payee. This is the entity to whom the transaction is
+being referenced. If you bought something from Amazon.com here you would put
+&amp;ldquo;Amazon&amp;rdquo;. Was the case that your employer paid your salary, here you would write
+your employer&amp;rsquo;s name. In this case we will call it &amp;ldquo;Opening Balance&amp;rdquo; since there
+is no real entity.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lines 3-4:&lt;/strong&gt; Correspond to assets. In this case we have two banks. One with
+a Checking account and one with a Savings account.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 5-6:&lt;/strong&gt; Represents liabilites, a Mastercard from the same bank
+than our Checkings account and a Visa from another bank.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 7:&lt;/strong&gt; is the last line of the registry. You can see that it has no value
+assigned to it. When you do this, Ledger knows that you expect him to add
+everything in the previous lines and balance it to the given account. In this
+case our account is &amp;ldquo;Equity:Openin Balances&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;This special account is necesary because Ledger is a double-entry accounting
+system. That means that for every transaction there has to be a transaction of
+equal negative value so that everything balances.&lt;/p&gt;
+
+&lt;h2 id=&#34;knowing-your-net-worth&#34;&gt;Knowing your Net Worth&lt;/h2&gt;
+
+&lt;p&gt;Perfect now that we have written down all the values of our accounts down.
+Run in the terminal&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ledger -f journal.dat balance Assets Liabilities
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What this command says is:&lt;/p&gt;
+
+&lt;p&gt;ledger from the file journal.dat balance my Assets and Liabilities. The result
+will be as follows.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;           $2,100.00  Assets
+             $100.00    BankOne:Checking
+           $2,000.00    BankTwo:Savings
+            $-280.00  Liabilities
+            $-250.00    BankOne:Mastercard
+             $-30.00    BankThree:Visa
+--------------------
+           $1,820.00
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 1:&lt;/strong&gt; is the total of your Assets. &lt;em&gt;The sum of BankOne:Checking
+and BankTwo:Savings.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 4:&lt;/strong&gt; is the total of your Liabilities. &lt;em&gt;The sum of BankOne:Mastercard and
+BankThree:Visa&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Line 8:&lt;/strong&gt; is your net worth. &lt;em&gt;The sum of your Assets and your Liabilities&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;With this information now you know that even if you see $2,100.00 in your banks
+that you actually only have $1,820.00 that are yours because you have $280 in
+credit that you need to pay.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;If you liked this post please let me know in the comments so I write more about
+this topic.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hacking your finances</title>
+      <link>http://mauromorales.com/2015/01/08/hacking-your-finances/</link>
+      <pubDate>Thu, 08 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/01/08/hacking-your-finances/</guid>
+      <description>
+
+&lt;p&gt;Being a good developer is not only about knowing how to code. There are many
+other skills like communication, management, decision-making, etc. One of those
+very important skills is keeping track of your personal finances.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+
+&lt;p&gt;There are two important things to learn if you want to keep your finances under
+control.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You need a tool that makes it &lt;strong&gt;EASY&lt;/strong&gt; to keep track of your income and expenses&lt;/li&gt;
+&lt;li&gt;You need to develop the &lt;strong&gt;HABIT&lt;/strong&gt; of using that tool constantly&lt;/li&gt;
+&lt;li&gt;You need to generate the right reports in order to make &lt;strong&gt;SMART&lt;/strong&gt; decisions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;finding-the-right-tool&#34;&gt;Finding the right tool&lt;/h2&gt;
+
+&lt;p&gt;Finding the right tool is the easy part. All you need to do is to find something
+that &lt;strong&gt;a)&lt;/strong&gt; covers all your requirements and &lt;strong&gt;b)&lt;/strong&gt; makes you feel comfortable when
+using it.&lt;/p&gt;
+
+&lt;p&gt;By covering all your requirements what I mean is that the tool must be able to
+adapt to the kind of finances you manage. This will be very specific to each
+individual so you will have to find out what you need but here is a list of the
+important things I require from my tool&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;connect or import my non US bank statements&lt;/li&gt;
+&lt;li&gt;handle multiple currencies including Guatemalan Quetzales&lt;/li&gt;
+&lt;li&gt;access it while traveling&lt;/li&gt;
+&lt;li&gt;be able to track virtual accounts within my accounts (ie: funds)&lt;/li&gt;
+&lt;li&gt;track reimbursements from multiple companies&lt;/li&gt;
+&lt;li&gt;present reports of net flow, monthly expenses, etc.&lt;/li&gt;
+&lt;li&gt;track budget&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now don&amp;rsquo;t think that I came to have all these needs since I started keeping
+track of my finances. The first tool I used was Microsoft Money, it did all
+I needed and I could make reports easily. Later on I switched to using Google
+Sheets since it was so easy to access it from any computer and I wasn&amp;rsquo;t using
+Windows any more. After that I tried GNUCash because it did all that my
+spreadsheet did and more, plus thanks to Dropbox I could have it updated in
+every machine I used. My last and current tool is
+&lt;a href=&#34;http://ledger-cli.org/&#34;&gt;Ledger&lt;/a&gt; because it allows me to stay withing the
+confines of the command line.&lt;/p&gt;
+
+&lt;p&gt;Which brings me to the fact that you have to use a tool that you enjoy using.
+The truth is I will always prefer to use a tool over the command line than over
+the GUI because it makes me feel more productive.&lt;/p&gt;
+
+&lt;h2 id=&#34;developing-a-habit&#34;&gt;Developing a Habit&lt;/h2&gt;
+
+&lt;p&gt;Developing a habit is more complicated and this is why your tool has to make it
+easy for you because habits are more likely to stick if it doesn&amp;rsquo;t feel like
+a pain doing them. This is why you want to automate as much as you can of the
+process and then make a routine about the rest.&lt;/p&gt;
+
+&lt;p&gt;There are tools like mint that can make pretty much everything for you but if
+you care about privacy I wouldn&amp;rsquo;t recommend it. In my case I don&amp;rsquo;t use it
+because they limit usage only to their list of associated banks. Being a CLI
+tool, Ledger is fully automatable but be warned that this might take a while.&lt;/p&gt;
+
+&lt;p&gt;Initially you might want to do all the process by hand because this will allow
+you to see which are the painful parts in the process and also will make you
+feel more comfortable with the tool. Doing the process manually also allows you
+to build the rules on which your automation will be based.&lt;/p&gt;
+
+&lt;p&gt;Depending on how many transactions you make every month you can do your finances
+every day/week/two weeks/month. I wouldn&amp;rsquo;t recommend doing them less than every
+month and more than once a day would be definitely too much. For me biweekly is
+the best option. I do it once every 5th of the month because it is when I have
+to pay my cards and I do it once every 20th because it is when I get paid.&lt;/p&gt;
+
+&lt;p&gt;Now the trick to create a routine is &lt;strong&gt;1)&lt;/strong&gt; having a trigger &lt;strong&gt;2)&lt;/strong&gt; doing the process
+without interruptions &lt;strong&gt;3)&lt;/strong&gt; having a reward. This is why I chose those specific
+dates because there are specific triggers and rewards as you can see:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;5th&lt;/th&gt;
+&lt;th&gt;20th&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Trigger&lt;/td&gt;
+&lt;td&gt;Credit Card payment due&lt;/td&gt;
+&lt;td&gt;I get paid&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Process&lt;/td&gt;
+&lt;td&gt;Pay Credit Cards &amp;amp; update ledger&lt;/td&gt;
+&lt;td&gt;Update ledger &amp;amp; generate Reports&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Reward&lt;/td&gt;
+&lt;td&gt;I don&amp;rsquo;t pay interests&lt;/td&gt;
+&lt;td&gt;I&amp;rsquo;m confident on where I stand&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Another little hack I have is that I use the card for everything. If I take cash
+out I keep it as a miscellaneous expense and I don&amp;rsquo;t record any detail of it. Some
+people like to use their smart-phone to keep track of those expenses but I find
+it tedious.&lt;/p&gt;
+
+&lt;p&gt;Once you have defined your habit you just have to stick to it. No matter what,
+you stick to it! Believe me after a while it will become habit.&lt;/p&gt;
+
+&lt;h2 id=&#34;generating-the-right-reports&#34;&gt;Generating the right reports&lt;/h2&gt;
+
+&lt;p&gt;What kind of decisions you need to make will depend on your current financial
+situation. Whether you should spend some money or not will be completely
+different if you are in debt or not. So first you need to determine what are
+your priorities.&lt;/p&gt;
+
+&lt;p&gt;Once you know your priorities you need to create a budget. I&amp;rsquo;m not going to go
+through that right now but I will in a future post. Creating a budget is like
+setting up your Key Performance Indicators. If you stick to it you will reach
+your goal.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you know you need to replace your computer every 3 years and you are
+willing to spend no more than $2000 on it. Then you know you need to put $55
+aside each month in order to accomplish your goal.&lt;/p&gt;
+
+&lt;p&gt;There are many reports you may want to have and with enough data to play with
+you may even come up with new ones but I believe having the following three is
+a good place to start.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Net Worth:&lt;/strong&gt; You want to know how much money do you have and how much you
+owe.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Monthly Expenses:&lt;/strong&gt; You want to know where your money is going.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Funds Balance:&lt;/strong&gt; You want to measure where you stand with your goals.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;final-thoughts&#34;&gt;Final thoughts&lt;/h2&gt;
+
+&lt;p&gt;Keeping track of your finances is not harder than coding or managing a project.
+If you gamify it you may even have lot&amp;rsquo;s of fun while doing it.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m working on a couple of posts in order to show in detail how I use Ledger. In
+the mean time feel free to contact me with any questions you may have.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Annual Review 2014</title>
+      <link>http://mauromorales.com/2015/01/01/annual-review-2014/</link>
+      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/01/01/annual-review-2014/</guid>
+      <description>
+
+&lt;p&gt;2014 has been a year I won&amp;rsquo;t be able to forget. During the last five years, I&amp;rsquo;ve
+done a list of goals and I&amp;rsquo;ve focused on reaching as many as possible. This year
+more important than the amount of reached goals, it&amp;rsquo;s been all about the quality
+of the events that happened in my life. So without further do, here is my review
+of what happened to be a wonderful year.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;h2 id=&#34;the-good&#34;&gt;The Good&lt;/h2&gt;
+
+&lt;p&gt;Last year I was given the task to find two programmers to grow our team at LAS.
+The first of January we welcomed them in Leysin and I&amp;rsquo;m lucky enough to count
+them as part of my family while away from home.&lt;/p&gt;
+
+&lt;p&gt;Living in Europe has allowed me to watch some of my favorite bands. In January
+I was able to see Protest the Hero and TesseracT. Up until now I think I&amp;rsquo;m just
+missing A7X to scratch of my favorites list.&lt;/p&gt;
+
+&lt;p&gt;In February I managed to move out to a bigger apartment. Living in a studio was
+becoming a pain in the butt so that was really nice.&lt;/p&gt;
+
+&lt;p&gt;I wasn&amp;rsquo;t expecting to learn how to snowboard. I&amp;rsquo;m not really into extreme
+sports, ok who am I kidding? I&amp;rsquo;m not really into sports so having done that made
+me feel really well.&lt;/p&gt;
+
+&lt;p&gt;March was the climax of my year. Gretel and I were able to celebrate a small
+civil wedding only with our close family which was very special for me and for
+the religious wedding we had a huge party. Maybe it&amp;rsquo;s because of the fact that
+it was my own wedding that I cannot be objective but I really think it was one
+of the must fun and cool weddings ever.&lt;/p&gt;
+
+&lt;p&gt;For the honey moon we went to Brazil. Rio and São Paulo are great, the
+Brazilian culture left me a good taste of mouth and I&amp;rsquo;d love to dedicate more
+time to it in the near future.&lt;/p&gt;
+
+&lt;p&gt;In the middle of the year I went to RuLu, a Ruby conference in Lyon. Gretel came
+with me so we were able to learn about a very pretty city and enjoy all the
+delicious French food. We ended up finding out Lyon is considered the
+gastronomic capital, yum!&lt;/p&gt;
+
+&lt;p&gt;Something really interesting this year was to have multiple companies interested
+in my profile. I got two offers to work in different cities in Switzerland
+including Zurich and three cities in Germany including Berlin. Not bad for the
+Guatemalan average Joe.&lt;/p&gt;
+
+&lt;p&gt;To close with a flourish I visited the city of love with my wife. Despite the
+bad weather, we got to know places, eat and fall in love even more.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-bad&#34;&gt;The Bad&lt;/h2&gt;
+
+&lt;p&gt;Having spent another six months away from Gretel was the hardest thing of the
+year. We were not planning for this which made it harder than last year. The
+good thing was that in October we closed that chapter from our lives and now we
+can start to build our home.&lt;/p&gt;
+
+&lt;p&gt;The rest of the negative things that happened were caused by my lack of
+motivation during the year. I didn&amp;rsquo;t exercise much, I didn&amp;rsquo;t read as much as
+I normally do and I didn&amp;rsquo;t work on side projects. The direct results were that
+I gained some weight, I didn&amp;rsquo;t learn as much as I wanted to and I didn&amp;rsquo;t launch
+my first product. The good thing is that those will be the specific areas I will
+be focusing on in 2015.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This goals based system has proven to work and I already have one for 2015.
+However I realize I need to have a framework based on habits in order to keep
+hustling even when I&amp;rsquo;m not in my best.&lt;/p&gt;
+
+&lt;p&gt;Above all I can say that I&amp;rsquo;m very satisfied and I&amp;rsquo;m looking forward to start the
+year full of energy. Happy new year! I hope you can accomplish all your goals.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

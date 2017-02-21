@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Productivity Lean Risk on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/productivity-lean-risk/index.xml</link>
+    <description>Recent content in Productivity Lean Risk on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/productivity-lean-risk/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The 40,000 Dollar Checklist</title>
+      <link>http://mauromorales.com/2015/04/16/the-40000-dollar-checklist/</link>
+      <pubDate>Thu, 16 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/04/16/the-40000-dollar-checklist/</guid>
+      <description>
+
+&lt;p&gt;The other day my wife and I were talking to a friend of hers and she told us how
+launching a campaign with a tiny mistake cost her company around $40K. She hated
+the fact that it could have been prevented if only she had &amp;ldquo;double checked&amp;rdquo;.
+I told her how I use checklists for deploying code to production and she
+couldn&amp;rsquo;t believe there was such a simple solution.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;I also learned this lesson the hard way. One time I was asked to generate
+a report. I wrote some SQL and hit enter. &amp;ldquo;What an idiot!&amp;rdquo; I said to myself as
+I realized I had left a TRUNCATE TABLE at the top of my script (If you are not
+familiar with SQL this means delete all the information).&lt;/p&gt;
+
+&lt;p&gt;And of course I had no backup. Luckily I was able to regenerate the information
+from different sources but not without wasting a LOT of time! After that
+I decided to use a checklist before putting anything in production, so I made
+sure I had an updated backup.&lt;/p&gt;
+
+&lt;h2 id=&#34;when-to-use-checklists&#34;&gt;When to use checklists&lt;/h2&gt;
+
+&lt;p&gt;Going through a checklist is a simple but brilliant solution used to reduce
+mistakes in Lean manufacturing, the aviation industry, some areas of medicine,
+etc. However unless you are some sort of cyborg you don&amp;rsquo;t want to systematize
+every single thing you do during your day.&lt;/p&gt;
+
+&lt;p&gt;The way I decide what goes into a checklist and what doesn&amp;rsquo;t is by making myself
+the following question&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;How high is the risk of getting this wrong?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Not every mistake will be a matter of life and death, nor every bug cost you
+thousands of dollars, but if there is a chance it will, make sure you get things
+right the first time.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-do-a-checklist&#34;&gt;How to do a checklist&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ X ] Done Item&lt;/li&gt;
+&lt;li&gt;[ _ ] Pending Item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;m serious! You can use pen and paper, a text document, a spreadsheet or some
+app like &lt;a href=&#34;https://www.wunderlist.com/&#34;&gt;Wunderlist&lt;/a&gt;. Just make sure it is simple enough that you&amp;rsquo;ll want to
+use it.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

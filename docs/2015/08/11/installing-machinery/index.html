@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Installing Machinery &middot; Mauro Morales</title>
+        <meta name="description" content="For the past three months I&rsquo;ve been working on a really cool tool called Machinery and I&rsquo;d like to share some of the neat things you can do with it.
+READMORE
+In this first post I&rsquo;ll show you how to install Machinery on openSUSE 13.2
+First you need to add the systemsmanagement repo to your system. You can easily do it with zypper running the following command as root:
+zypper ar -f http://r.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.19-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Installing Machinery">
+<meta property="og:description" content="For the past three months I&rsquo;ve been working on a really cool tool called Machinery and I&rsquo;d like to share some of the neat things you can do with it.
+READMORE
+In this first post I&rsquo;ll show you how to install Machinery on openSUSE 13.2
+First you need to add the systemsmanagement repo to your system. You can easily do it with zypper running the following command as root:
+zypper ar -f http://r.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://mauromorales.com/2015/08/11/installing-machinery/">
+        <link rel="stylesheet" href="http://mauromorales.com/dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-10123298-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://mauromorales.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/_mauromorales">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Gitlab" title="Gitlab" href="https://gitlab.com/mauromorales">
+                                <i class="fa fa-gitlab"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/mauromorales">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://linkedin.com/in/mauromorales/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:contact@mauromorales.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Installing Machinery</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2015-08-11" itemprop="datePublished">Tue, Aug 11, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://google.com/&#43;XXX" itemprop="url" rel="author">Mauro Morales</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>For the past three months I&rsquo;ve been working on a really cool tool called
+<a href="http://machinery-project.org">Machinery</a> and I&rsquo;d like to share some of the neat things you can do with it.</p>
+
+<p>READMORE</p>
+
+<p>In this first post I&rsquo;ll show you how to install Machinery on <a href="/blog/run-opensuse-13-2-in-linode">openSUSE
+13.2</a></p>
+
+<p>First you need to add the <code>systemsmanagement</code> repo to your system. You can
+easily do it with zypper running the following command as root:</p>
+
+<pre><code class="language-shell">zypper ar -f http://r.opensu.se/systemsmanagement:machinery/13.2 \
+systemsmanagement
+zypper refresh
+</code></pre>
+
+<p><em>You will get asked about a key for the repo. At this point you need to trust
+temporarily or trust always.</em></p>
+
+<p>Immediatelly afterwards we should be able to install Machinery by running:</p>
+
+<pre><code class="language-shell">zypper in machinery
+</code></pre>
+
+<p><em>When asked if you want to install the respective packages you&rsquo;ll need to answer
+with a &ldquo;y&rdquo; (yes)</em></p>
+
+<p>Now let&rsquo;s double check that machinery was propperly installed by running the
+version option.</p>
+
+<pre><code class="language-shell">machinery --version
+</code></pre>
+
+<p>At the moment of writing the version is:</p>
+
+<pre><code class="language-shell">machinery version 1.11.2 (system description format version 4)
+</code></pre>
+
+<p>Learn more about how to use Machinery on the <a href="https://github.com/SUSE/machinery/wiki">wiki</a> or by reading the man
+page.</p>
+
+<pre><code class="language-shell">man machinery
+</code></pre>
+
+<p>Have fun! And if you spot any issues please let us know by opening an <a href="https://github.com/SUSE/machinery/issues">issue</a>
+and if you have any questions write us to our <a href="mailto:machinery@lists.suse.com">mailing
+list</a></p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Installing%20Machinery&url=http%3a%2f%2fmauromorales.com%2f2015%2f08%2f11%2finstalling-machinery%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fmauromorales.com%2f2015%2f08%2f11%2finstalling-machinery%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fmauromorales.com%2f2015%2f08%2f11%2finstalling-machinery%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Installing%20Machinery&url=http%3a%2f%2fmauromorales.com%2f2015%2f08%2f11%2finstalling-machinery%2f&summary="
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'mauromoralesdotcom';
+    var disqus_identifier = 'http:\/\/mauromorales.com\/2015\/08\/11\/installing-machinery\/';
+    var disqus_title = 'Installing Machinery';
+    var disqus_url = 'http:\/\/mauromorales.com\/2015\/08\/11\/installing-machinery\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://mauromorales.com/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="http://mauromorales.com/js/jquery.fitvids.js"></script>
+        <script src="http://mauromorales.com/js/scripts.js"></script>
+    </body>
+</html>
+

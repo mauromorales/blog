@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machinery Docker on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/machinery-docker/index.xml</link>
+    <description>Recent content in Machinery Docker on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/machinery-docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Test Drive Machinery Using a Docker Container</title>
+      <link>http://mauromorales.com/2015/09/10/test-drive-machinery-using-a-docker-container/</link>
+      <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/09/10/test-drive-machinery-using-a-docker-container/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;http://mauromorales.com/blogs/installing-machinery/&#34;&gt;last post&lt;/a&gt; I shared how to install Machinery. The process assumes that
+you are running openSUSE 13.2 but this of course might not be the case. You
+might be running a different Linux distro or even another OS. That&amp;rsquo;s were Docker
+comes very handy. In this post I will show you how to easily test drive
+Machinery on a container.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;Machinery will save all its data in a &lt;code&gt;.machinery&lt;/code&gt; folder at your home
+directory. In order to be valuable, this data needs to persist after you kill
+your Docker containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;mkdir -p ~/.machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can pull the image from the Docker Hub&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker pull mauromorales/machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the image is in your system all we need to do is to start a container every
+time we want to run machinery.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ docker run -ti \
+&amp;gt; -v ${HOME}/.machinery:/root/.machinery \
+&amp;gt; -v ${HOME}.ssh:/root/.ssh \
+&amp;gt; mauromorales/machinery  /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we are telling docker to start a container in &lt;code&gt;-ti&lt;/code&gt; interactive mode with
+tty and to &lt;code&gt;-v&lt;/code&gt; map a volume from the folder we just created to the
+&lt;code&gt;/root/.machinery&lt;/code&gt; this is root&amp;rsquo;s home directory because root is running
+Machinery inside our container. Additionally we will also map our &lt;code&gt;.ssh&lt;/code&gt; folder
+so machinery can use your ssh keys to access the remote servers (if you don&amp;rsquo;t
+want to share this folder with your container just map it to a different
+directory and generate new keys) &lt;code&gt;mauromorales/machinery&lt;/code&gt; specifies the image we
+downloaded and finally we run bash.&lt;/p&gt;
+
+&lt;p&gt;Once your container has started you can start using Machinery :) happy hacking!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

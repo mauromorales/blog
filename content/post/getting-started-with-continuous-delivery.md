@@ -1,7 +1,6 @@
 ---
 title: Getting started with Continuous Delivery
 date: 2015-04-02
-tags: continuous delivery, middleman, git flow, semaphore, ansible, rake
 published: true
 featured: 2
 ---

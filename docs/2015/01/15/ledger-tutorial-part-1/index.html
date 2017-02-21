@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Ledger Tutorial part 1 &middot; Mauro Morales</title>
+        <meta name="description" content="Ledger is a great tool to keep track of your finances. It&rsquo;s simple, fast and most important it doesn&rsquo;t limit you like most other tools.
+The following post is a small introduction on how to start traking your finances this 2015.
+READMORE
+Installation Installing ledger in OS X is as simple as calling a brew command:
+brew install ledger  Here you can find information for other systems.
+Define a starting point In order to keep track of your finances you need to start somewhere.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.19-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Ledger Tutorial part 1">
+<meta property="og:description" content="Ledger is a great tool to keep track of your finances. It&rsquo;s simple, fast and most important it doesn&rsquo;t limit you like most other tools.
+The following post is a small introduction on how to start traking your finances this 2015.
+READMORE
+Installation Installing ledger in OS X is as simple as calling a brew command:
+brew install ledger  Here you can find information for other systems.
+Define a starting point In order to keep track of your finances you need to start somewhere.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://mauromorales.com/2015/01/15/ledger-tutorial-part-1/">
+        <link rel="stylesheet" href="http://mauromorales.com/dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-10123298-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://mauromorales.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/_mauromorales">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Gitlab" title="Gitlab" href="https://gitlab.com/mauromorales">
+                                <i class="fa fa-gitlab"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/mauromorales">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://linkedin.com/in/mauromorales/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:contact@mauromorales.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Ledger Tutorial part 1</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2015-01-15" itemprop="datePublished">Thu, Jan 15, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://google.com/&#43;XXX" itemprop="url" rel="author">Mauro Morales</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p><a href="http://www.ledger-cli.org/">Ledger</a> is a great tool to keep track of your
+finances. It&rsquo;s simple, fast and most important it doesn&rsquo;t limit you like most
+other tools.</p>
+
+<p>The following post is a small introduction on how to start traking your finances
+this 2015.</p>
+
+<p>READMORE</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Installing ledger in OS X is as simple as calling a brew command:</p>
+
+<pre><code class="language-shell">brew install ledger
+</code></pre>
+
+<p><a href="http://www.ledger-cli.org/download.html">Here</a> you can find information for
+other systems.</p>
+
+<h2 id="define-a-starting-point">Define a starting point</h2>
+
+<p>In order to keep track of your finances you need to start somewhere. If you are
+doing this at the beginning of the year or in the middle of it, it doesn&rsquo;t
+matter. The important thing is that you have the sources of your different
+accounts and credit cards so you can migrate them to ledger.</p>
+
+<p>I will suggest you try with your current balance today. Don&rsquo;t try to get old
+data now. Picking up a new tool is already hard work, specially if you need to
+build a habit to use it. Plus once you dominate it you will be able to automate
+things and you might be able to import that data in a snap.</p>
+
+<p>My starting point for this tutorial will be January 1st 2015. So now I go into
+every imaginary account I have and verify what is my balance up to that day.
+Once I have collected all that information I will write it down into my journal
+file from which ledger will read and generate reports.</p>
+
+<p>Create a file called journal.dat and add the following</p>
+
+<pre><code>; Testing ledger CLI
+2015/01/01  Opening Balance
+  Assets:BankOne:Checking                $100.00
+  Assets:BankTwo:Savings               $2,000.00
+  Liabilities:BankOne:Mastercard        $-250.00
+  Liabilities:BankThree:Visa             $-30.00
+  Equity:Opening Balances
+</code></pre>
+
+<p><strong>Line 1:</strong> starts with a semicolon and it&rsquo;s just a comment so you don&rsquo;t really need
+it but it&rsquo;s very useful when you need to keep notes about a particular expense.</p>
+
+<p><em>You will find other ways to put comments in the
+<a href="http://www.ledger-cli.org/docs.html">documentation</a>. Feel free to use the one
+you prefer. For consistency purposes I will use the semicolon.</em></p>
+
+<p><strong>Line 2:</strong> starts with a date. This is the date from the registry we are adding.
+<em>Everything between this date and the next empty line will be our registry.</em> The
+format is <strong>YYYY/MM/DD</strong>. <em>Banks don&rsquo;t always follow the same format for dates
+so be careful with this</em></p>
+
+<p>After the date we see the payee. This is the entity to whom the transaction is
+being referenced. If you bought something from Amazon.com here you would put
+&ldquo;Amazon&rdquo;. Was the case that your employer paid your salary, here you would write
+your employer&rsquo;s name. In this case we will call it &ldquo;Opening Balance&rdquo; since there
+is no real entity.</p>
+
+<p><strong>Lines 3-4:</strong> Correspond to assets. In this case we have two banks. One with
+a Checking account and one with a Savings account.</p>
+
+<p><strong>Line 5-6:</strong> Represents liabilites, a Mastercard from the same bank
+than our Checkings account and a Visa from another bank.</p>
+
+<p><strong>Line 7:</strong> is the last line of the registry. You can see that it has no value
+assigned to it. When you do this, Ledger knows that you expect him to add
+everything in the previous lines and balance it to the given account. In this
+case our account is &ldquo;Equity:Openin Balances&rdquo;</p>
+
+<p>This special account is necesary because Ledger is a double-entry accounting
+system. That means that for every transaction there has to be a transaction of
+equal negative value so that everything balances.</p>
+
+<h2 id="knowing-your-net-worth">Knowing your Net Worth</h2>
+
+<p>Perfect now that we have written down all the values of our accounts down.
+Run in the terminal</p>
+
+<pre><code class="language-shell">ledger -f journal.dat balance Assets Liabilities
+</code></pre>
+
+<p>What this command says is:</p>
+
+<p>ledger from the file journal.dat balance my Assets and Liabilities. The result
+will be as follows.</p>
+
+<pre><code>           $2,100.00  Assets
+             $100.00    BankOne:Checking
+           $2,000.00    BankTwo:Savings
+            $-280.00  Liabilities
+            $-250.00    BankOne:Mastercard
+             $-30.00    BankThree:Visa
+--------------------
+           $1,820.00
+</code></pre>
+
+<p><strong>Line 1:</strong> is the total of your Assets. <em>The sum of BankOne:Checking
+and BankTwo:Savings.</em></p>
+
+<p><strong>Line 4:</strong> is the total of your Liabilities. <em>The sum of BankOne:Mastercard and
+BankThree:Visa</em></p>
+
+<p><strong>Line 8:</strong> is your net worth. <em>The sum of your Assets and your Liabilities</em></p>
+
+<p>With this information now you know that even if you see $2,100.00 in your banks
+that you actually only have $1,820.00 that are yours because you have $280 in
+credit that you need to pay.</p>
+
+<p><em>If you liked this post please let me know in the comments so I write more about
+this topic.</em></p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Ledger%20Tutorial%20part%201&url=http%3a%2f%2fmauromorales.com%2f2015%2f01%2f15%2fledger-tutorial-part-1%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fmauromorales.com%2f2015%2f01%2f15%2fledger-tutorial-part-1%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fmauromorales.com%2f2015%2f01%2f15%2fledger-tutorial-part-1%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Ledger%20Tutorial%20part%201&url=http%3a%2f%2fmauromorales.com%2f2015%2f01%2f15%2fledger-tutorial-part-1%2f&summary="
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'mauromoralesdotcom';
+    var disqus_identifier = 'http:\/\/mauromorales.com\/2015\/01\/15\/ledger-tutorial-part-1\/';
+    var disqus_title = 'Ledger Tutorial part 1';
+    var disqus_url = 'http:\/\/mauromorales.com\/2015\/01\/15\/ledger-tutorial-part-1\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://mauromorales.com/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="http://mauromorales.com/js/jquery.fitvids.js"></script>
+        <script src="http://mauromorales.com/js/scripts.js"></script>
+    </body>
+</html>
+

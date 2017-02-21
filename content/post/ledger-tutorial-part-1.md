@@ -1,7 +1,6 @@
 ---
 title: Ledger Tutorial part 1
 date: 2015-01-15
-tags: ledger
 published: true
 featured: 3
 ---

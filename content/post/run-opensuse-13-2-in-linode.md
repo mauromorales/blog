@@ -1,7 +1,6 @@
 ---
 title: Run openSUSE 13.2 in Linode
 date: 2015-06-26
-tags: linode, opensuse, vps
 published: true
 featured: 5
 ---

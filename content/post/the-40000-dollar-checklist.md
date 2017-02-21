@@ -1,7 +1,6 @@
 ---
 title: The 40,000 Dollar Checklist
 date: 2015-04-16
-tags: productivity, lean, risk
 published: true
 ---
 

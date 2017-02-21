@@ -1,7 +1,6 @@
 ---
 title: Annual Review 2014
 date: 2015-01-01
-tags: reviews
 published: true
 ---
 

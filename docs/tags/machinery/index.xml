@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machinery on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/machinery/index.xml</link>
+    <description>Recent content in Machinery on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/machinery/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Machinery 1.17 - Inspecting Ubuntu 14.04 Systems</title>
+      <link>http://mauromorales.com/2016/01/25/machinery-1-17-inspecting-ubuntu-1404-systems/</link>
+      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2016/01/25/machinery-1-17-inspecting-ubuntu-1404-systems/</guid>
+      <description>
+
+&lt;p&gt;The main feature of this minor release is the ability to inspect Ubuntu 14.04
+and Docker Containers. No special configuration is required you just need to
+run the &lt;code&gt;inspect&lt;/code&gt; or &lt;code&gt;inspect-container&lt;/code&gt; command pointed at the Ubuntu host.&lt;/p&gt;
+
+&lt;p&gt;In order to add this functionality we had to teach Machinery a few new tricks
+to handle the upstart init system and the dpkg package manager.&lt;/p&gt;
+
+&lt;h2 id=&#34;upstart&#34;&gt;Upstart&lt;/h2&gt;
+
+&lt;p&gt;Machinery can already find SysVinit and systemd services in a system. Even
+though Upstart is pretty much on it&amp;rsquo;s way out it was the third big player in
+the init system league and being able to parse it&amp;rsquo;s services is a great
+addition for Machinery&amp;rsquo;s code base.&lt;/p&gt;
+
+&lt;p&gt;In the case of Ubuntu 14.04 we were able to find the complete list of services
+by merging the SysV and Upstart services with the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# upstart services
+/sbin/initctl show-config -e
+# sysv services
+/usr/sbin/service --status-all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The main takeaway for me on this topic was that there is no generic way to
+determine the default init system on a Linux distribution and that in some
+cases like in Ubuntu 14.04 and RHEL 6 they can be a mix of two.&lt;/p&gt;
+
+&lt;h2 id=&#34;dpkg&#34;&gt;Dpkg&lt;/h2&gt;
+
+&lt;p&gt;Ubuntu is also the first distribution that Machinery can inspect that uses the
+dpkg package manager and we had to expand the &lt;em&gt;packages&lt;/em&gt;, &lt;em&gt;repositories&lt;/em&gt;, &lt;em&gt;patterns&lt;/em&gt;,
+&lt;em&gt;config-files&lt;/em&gt;, &lt;em&gt;changed-managed-files&lt;/em&gt; and &lt;em&gt;unmanaged-files scopes&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the &lt;em&gt;packages&lt;/em&gt; scope we get all the information from running &lt;code&gt;dpkg -l&lt;/code&gt;. In
+order to differentiate rpm from deb packages we added the &lt;em&gt;package_system&lt;/em&gt;
+attribute which can be &amp;ldquo;rpm&amp;rdquo; or &amp;ldquo;deb&amp;rdquo; respectively&lt;/p&gt;
+
+&lt;p&gt;When working on the &lt;em&gt;repositories&lt;/em&gt; scope we were originally going to do the same
+but in the end differentiating by the tool used to install those packages
+proved to be a better approach. There are enough differences between zypper,
+yum and apt so we added the attribute &lt;em&gt;repository_system&lt;/em&gt; which can have a
+value of &amp;ldquo;zypp&amp;rdquo;, &amp;ldquo;yum&amp;rdquo; and &amp;ldquo;apt&amp;rdquo; accordingly.&lt;/p&gt;
+
+&lt;p&gt;In the &lt;em&gt;patterns&lt;/em&gt; scope we introduced a dependency to the &amp;ldquo;tasksel&amp;rdquo; command. When
+present in a system and if there are any tasks installed they get listed using
+the &lt;code&gt;tasksel --list-tasks&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;config-files&lt;/em&gt; and &lt;em&gt;changed-managed-files&lt;/em&gt; scopes depend deeply on the
+information provided by the package. In order determine what has changed we
+rely on the checksums provided by the package maintainer. Unfortunately many
+packages don&amp;rsquo;t provide the checksums for every one of their files. This means
+that if a configuration or managed file that lacks it&amp;rsquo;s checksum was changed
+after being installed Machinery won&amp;rsquo;t be able to detect this change.&lt;/p&gt;
+
+&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve installed Machinery as a package using zypper all you need to do is
+update it. (Builds on openSUSE Leap and SLE take longer to be available)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zypper up machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve installed Machinery as a gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem update machinery-tool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally update all your system descriptions by running&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; machinery upgrade-format --all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Learn more about your systems with Machinery!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

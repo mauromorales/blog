@@ -1,7 +1,6 @@
 ---
 title: My First Hackweek Was All about Shippping
 date: 2015-12-19
-tags: suse, yes_ship_it
 published: true
 ---
 

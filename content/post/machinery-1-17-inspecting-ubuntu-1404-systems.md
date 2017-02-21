@@ -1,7 +1,6 @@
 ---
 title: Machinery 1.17 - Inspecting Ubuntu 14.04 Systems
 date: 2016-01-25
-tags: machinery
 published: true
 ---
 

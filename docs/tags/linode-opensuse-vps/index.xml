@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linode Opensuse Vps on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/linode-opensuse-vps/index.xml</link>
+    <description>Recent content in Linode Opensuse Vps on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/linode-opensuse-vps/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Run openSUSE 13.2 in Linode</title>
+      <link>http://mauromorales.com/2015/06/26/run-opensuse-13-2-in-linode/</link>
+      <pubDate>Fri, 26 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/06/26/run-opensuse-13-2-in-linode/</guid>
+      <description>&lt;p&gt;Linode is one of my favorite VPS providers out there. One of the reasons why
+I like them is because they make it extremely easy to run openSUSE.  This post
+is a quick tutorial on how to get you started.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;The first time you log in you will be presented with the different Linode plans.
+And the Location where your server will reside.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/linode-plans.png&#34; alt=&#34;1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll choose the smallest plan&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/linode-1024.png&#34; alt=&#34;2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you see your Linode listed, click on it&amp;rsquo;s name&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/list-of-linodes.png&#34; alt=&#34;3&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now click on &amp;ldquo;Deploy an image&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/deploy-an-image.png&#34; alt=&#34;4&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In there we will select openSUSE 13.2, the amount of space in disk. You can
+leave the defaults which will choose for the full disk size with a 256MB swap
+partition. Choose your password and click Deploy.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/select-opensuse.png&#34; alt=&#34;5&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This will take a bit but as soon as it&amp;rsquo;s done you will be able to Boot your
+machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/boot-your-linode.png&#34; alt=&#34;6&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally click on the &amp;ldquo;Remote Access&amp;rdquo; tab so you can see different options to log
+into your machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-opensuse-13-2-in-linode/remote-access.png&#34; alt=&#34;7&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I personally like to ssh in from my favorite terminal app&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh root@10.0.0.10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will be welcomed by openSUSE with the following message:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Have a lot of fun...
+linux:~ #
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you can play with your new openSUSE 13.2 box. Enjoy!&lt;/p&gt;
+
+&lt;p&gt;BTW if you have never considered this Linux distro, here are &lt;a href=&#34;https://sysrich.co.uk/why-opensuse/&#34;&gt;4 reasons
+why&lt;/a&gt; you will like it.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

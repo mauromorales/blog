@@ -1,7 +1,6 @@
 ---
 title: Dockerizing Your Infrastructure with Machinery
 date: 2015-10-15
-tags: machinery, docker, introspection, vm, container
 published: true
 ---
 

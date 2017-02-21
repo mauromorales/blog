@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Getting started with Continuous Delivery &middot; Mauro Morales</title>
+        <meta name="description" content="More and more companies are requiring developers to understand Continuous Integration and Continuous Delivery but starting to implement it in your projects can be a bit overwhelming. Start with a simple website and soon enough you will feel more confident to do with more complex projects.
+READMORE
+The right mindset  TDD/BDD, CI/CD, XP, Agile, Scrum &hellip;. Ahhhhh, leave me alone I just want to code!
+ Yes, all this methodologies can be a bit complicated at first, but simply because you are not used to them.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.19-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Getting started with Continuous Delivery">
+<meta property="og:description" content="More and more companies are requiring developers to understand Continuous Integration and Continuous Delivery but starting to implement it in your projects can be a bit overwhelming. Start with a simple website and soon enough you will feel more confident to do with more complex projects.
+READMORE
+The right mindset  TDD/BDD, CI/CD, XP, Agile, Scrum &hellip;. Ahhhhh, leave me alone I just want to code!
+ Yes, all this methodologies can be a bit complicated at first, but simply because you are not used to them.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://mauromorales.com/2015/04/02/getting-started-with-continuous-delivery/">
+        <link rel="stylesheet" href="http://mauromorales.com/dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-10123298-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://mauromorales.com/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/_mauromorales">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Gitlab" title="Gitlab" href="https://gitlab.com/mauromorales">
+                                <i class="fa fa-gitlab"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/mauromorales">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://linkedin.com/in/mauromorales/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:contact@mauromorales.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="/project/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Contact" href="/page/contact/">Contact</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/page/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Getting started with Continuous Delivery</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2015-04-02" itemprop="datePublished">Thu, Apr 2, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://google.com/&#43;XXX" itemprop="url" rel="author">Mauro Morales</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p>More and more companies are requiring developers to understand Continuous
+Integration and Continuous Delivery but starting to implement it in your
+projects can be a bit overwhelming. Start with a simple website and soon enough
+you will feel more confident to do with more complex projects.</p>
+
+<p>READMORE</p>
+
+<h2 id="the-right-mindset">The right mindset</h2>
+
+<blockquote>
+<p>TDD/BDD, CI/CD, XP, Agile, Scrum &hellip;. Ahhhhh, leave me alone I just want to
+code!</p>
+</blockquote>
+
+<p>Yes, all this methodologies can be a bit complicated at first, but simply
+because you are not used to them. Like a muscle you need to train them and the
+more you do so, the sooner you won&rsquo;t feel like doing them is a total waste of
+time.</p>
+
+<p>Once you have made up your mind that CD is for you, your team or your project
+then you will need to define a process and follow it. Don&rsquo;t make it easy to
+break the process and before you know it you and your team will feel like fish
+in the water.</p>
+
+<h2 id="automate-a-simple-website-deployment">Automate a simple website deployment</h2>
+
+<p>There are many ways you can solve this problem. I will use a certain stack. If
+you don&rsquo;t have experience with any of the tools, try to implement it with one
+you do have experience with.</p>
+
+<table>
+<thead>
+<tr>
+<th>Stack</th>
+<th>Tool/Service</th>
+<th>Alternatives</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>VPS</td>
+<td>DigitalOcean</td>
+<td>Linode or Vagrant</td>
+</tr>
+
+<tr>
+<td>Configuration Management</td>
+<td>Ansible</td>
+<td>Chef or Puppet</td>
+</tr>
+
+<tr>
+<td>Static site generator</td>
+<td>Middleman</td>
+<td>Jekyll or pure HTML</td>
+</tr>
+
+<tr>
+<td>CI/CD Server</td>
+<td>Semaphore</td>
+<td>Codeship or Jenkins</td>
+</tr>
+</tbody>
+</table>
+
+<p>The first thing is to create a new droplet in DO (you could also do this with
+Ansible but we won&rsquo;t at this tutorial). Make sure there is a <strong>deploy</strong> user and
+to set up ssh keys for it (again something we could do with Ansible but we&rsquo;ll
+leave that for another post) Setup your your domain to point to the new server&rsquo;s
+IP address, I will use &lsquo;example.com&rsquo;.</p>
+
+<h3 id="ansible">Ansible</h3>
+
+<p>Create a folder for your playbook and inside of it start with a file called
+<code>ansible.cfg</code>. There we will override the default configuration by pointing to
+a new inventory inside your playbook&rsquo;s folder and specify the deploy user.</p>
+
+<pre><code class="language-shell">[defaults]
+hostfile=inventory
+remote_user=deploy
+</code></pre>
+
+<p>Now in our <code>inventory</code> file we specify a group called web and include our
+domain.</p>
+
+<pre><code class="language-shell">[web]
+example.com
+</code></pre>
+
+<p>Our tasks will be defined in <code>simple-webserver.yml</code></p>
+
+<pre><code class="language-yml">---
+- name: Simple Web Server
+  hosts: example.com
+  sudo: True
+  tasks:
+    - name: Install nginx
+      apt: pkg=nginx state=installed update_cache=true
+      notify: start nginx
+    - name: remove default nginx site
+      file: path=/etc/nginx/sites-enabled/default state=absent
+    - name: Assures project root dir exists
+      file: &gt;
+        path=/srv/www/example.com
+        state=directory
+        owner=deploy
+        group=www-data
+    - name: copy nginx config file
+      template: &gt;
+        src=templates/nginx.conf.j2
+        dest=/etc/nginx/sites-available/example.com
+      notify: restart nginx
+    - name: enable configuration
+      file: &gt;
+        dest=/etc/nginx/sites-enabled/example.com
+        src=/etc/nginx/sites-available/example.com
+        state=link
+      notify: restart nginx
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+    - name: restart nginx
+      service: name=nginx state=restarted
+</code></pre>
+
+<p>In it we make reference to a template called <code>templates/nginx.conf.j2</code> where we will
+specify a simple virtual host.</p>
+
+<pre><code class="language-shell">server {
+        listen *:80;
+
+        root /srv/www/example.com;
+        index index.html index.htm;
+
+        server_name example.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+</code></pre>
+
+<p>I&rsquo;ll show you in another post how to do this same setup but with multiple
+virtual hosts in case you run multiple sites.</p>
+
+<p>Run it by calling:</p>
+
+<pre><code class="language-shell">ansible-playbook simple-webserver.yml
+</code></pre>
+
+<h3 id="middleman">Middleman</h3>
+
+<p>Middleman has a very simple way to deploy over rsync. Just make sure you have
+the following gem in your <code>Gemfile</code></p>
+
+<pre><code class="language-ruby">gem 'middleman-deploy'
+</code></pre>
+
+<p>And then add something like this to your <code>config.rb</code></p>
+
+<pre><code class="language-ruby">activate :deploy do |deploy|
+  deploy.method = :rsync
+  deploy.host   = 'example.com'
+  deploy.path   = '/srv/www/example.com'
+  deploy.user  = 'deploy'
+end
+</code></pre>
+
+<p>Before you can deploy you need to remember to build your site. This is prone to
+errors so instead we will add a rake task in our <code>Rakefile</code> to do this for us.</p>
+
+<pre><code class="language-ruby">desc 'Build site'
+task :build do
+  `middleman build`
+end
+
+desc 'Deploy site'
+task :deploy do
+  `middleman deploy`
+end
+
+desc 'Build and deploy site'
+task :build_deploy =&gt; [:build, :deploy] do
+end
+</code></pre>
+
+<h3 id="git-flow">Git Flow</h3>
+
+<p>Technically you don&rsquo;t really need <a href="https://github.com/nvie/gitflow">git flow</a> for this process but I do believe
+having a proper <a href="http://news.bbc.co.uk/go/rss/-/2/hi/default.stm">branching model</a> is key to a successful CD environment.
+Depending on your team&rsquo;s process you might want to use something else but if you
+don&rsquo;t have anything defined please take a look at git flow, it might be just
+what you need.</p>
+
+<p>For this tutorial I will oversimplify the process and just use the develop,
+master and release branches by following these three steps:</p>
+
+<ol>
+<li>Commit all the desired changes into the develop branch</li>
+<li>Create a release and add the release&rsquo;s information</li>
+<li>Merge the release into master</li>
+</ol>
+
+<p>Let&rsquo;s go through the steps in the command line. We start by adding the new
+features and committing them.</p>
+
+<pre><code class="language-shell">git add Rakefile
+git commit -m 'Add rake task for easier deployment'
+</code></pre>
+
+<p>Now we create a release.</p>
+
+<pre><code class="language-shell">git flow release start '1.0.0'
+</code></pre>
+
+<p>This would be a good time to test everything out. Bump the version number of
+your software (in my case 1.0.0), update the change log and do any last minute
+fixes.</p>
+
+<p>Commit the changes and let&rsquo;s wrap up this step by finishing our release.</p>
+
+<pre><code class="language-shell">git flow release finish '1.0.0'
+</code></pre>
+
+<p>Try to write something significant for your message tag so you can easily refer
+to a version later on by it&rsquo;s description.</p>
+
+<pre><code class="language-shell">git tag -n
+</code></pre>
+
+<p>Hold your horses and don&rsquo;t push your changes just yet.</p>
+
+<h3 id="semaphore">Semaphore</h3>
+
+<p>Add a new project from Github or Bitbucket.</p>
+
+<p>For the build you might want to have something along the lines of:</p>
+
+<pre><code class="language-ruby">bundle install --path vendor/bundle
+bundle exec rake spec
+</code></pre>
+
+<p>Now go into the projects settings inside the <em>Deployment</em> tab and add a server.</p>
+
+<p>Because we are using a generic option Sempahore will need access to our server.
+Generate an SSH key and paste the private in Semaphore and the public in your
+server.</p>
+
+<p>For the deploy commands you need to have something like this:</p>
+
+<pre><code class="language-shell">ssh-keyscan -H -p 22 example.com &gt;&gt; ~/.ssh/known_hosts
+bundle exec rake build_deploy
+</code></pre>
+
+<h3 id="push-your-changes">Push your changes</h3>
+
+<p>Push your changes in the master branch and voilà, Semaphore will build and
+deploy your site.</p>
+
+<p>Once you get into the habit of doing this with your website you will feel more
+confident of doing it with something like a Rails application.</p>
+
+<p>If you have any questions please leave them below, I&rsquo;ll respond to every single
+one of them.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Getting%20started%20with%20Continuous%20Delivery&url=http%3a%2f%2fmauromorales.com%2f2015%2f04%2f02%2fgetting-started-with-continuous-delivery%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fmauromorales.com%2f2015%2f04%2f02%2fgetting-started-with-continuous-delivery%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fmauromorales.com%2f2015%2f04%2f02%2fgetting-started-with-continuous-delivery%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Getting%20started%20with%20Continuous%20Delivery&url=http%3a%2f%2fmauromorales.com%2f2015%2f04%2f02%2fgetting-started-with-continuous-delivery%2f&summary="
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'mauromoralesdotcom';
+    var disqus_identifier = 'http:\/\/mauromorales.com\/2015\/04\/02\/getting-started-with-continuous-delivery\/';
+    var disqus_title = 'Getting started with Continuous Delivery';
+    var disqus_url = 'http:\/\/mauromorales.com\/2015\/04\/02\/getting-started-with-continuous-delivery\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="mauromorales.com" href="http://mauromorales.com/">mauromorales.com</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://mauromorales.com/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="http://mauromorales.com/js/jquery.fitvids.js"></script>
+        <script src="http://mauromorales.com/js/scripts.js"></script>
+    </body>
+</html>
+

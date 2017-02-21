@@ -2,7 +2,6 @@
 title: Hacking your finances
 date: 2015-01-08
 category: finances
-tags: ledger
 published: true
 ---
 Being a good developer is not only about knowing how to code. There are many

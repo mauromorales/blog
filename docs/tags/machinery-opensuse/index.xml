@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machinery Opensuse on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/machinery-opensuse/index.xml</link>
+    <description>Recent content in Machinery Opensuse on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/machinery-opensuse/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Installing Machinery</title>
+      <link>http://mauromorales.com/2015/08/11/installing-machinery/</link>
+      <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/08/11/installing-machinery/</guid>
+      <description>&lt;p&gt;For the past three months I&amp;rsquo;ve been working on a really cool tool called
+&lt;a href=&#34;http://machinery-project.org&#34;&gt;Machinery&lt;/a&gt; and I&amp;rsquo;d like to share some of the neat things you can do with it.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;In this first post I&amp;rsquo;ll show you how to install Machinery on &lt;a href=&#34;http://mauromorales.com/blog/run-opensuse-13-2-in-linode&#34;&gt;openSUSE
+13.2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;First you need to add the &lt;code&gt;systemsmanagement&lt;/code&gt; repo to your system. You can
+easily do it with zypper running the following command as root:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;zypper ar -f http://r.opensu.se/systemsmanagement:machinery/13.2 \
+systemsmanagement
+zypper refresh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;You will get asked about a key for the repo. At this point you need to trust
+temporarily or trust always.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Immediatelly afterwards we should be able to install Machinery by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;zypper in machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;When asked if you want to install the respective packages you&amp;rsquo;ll need to answer
+with a &amp;ldquo;y&amp;rdquo; (yes)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s double check that machinery was propperly installed by running the
+version option.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At the moment of writing the version is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;machinery version 1.11.2 (system description format version 4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Learn more about how to use Machinery on the &lt;a href=&#34;https://github.com/SUSE/machinery/wiki&#34;&gt;wiki&lt;/a&gt; or by reading the man
+page.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;man machinery
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Have fun! And if you spot any issues please let us know by opening an &lt;a href=&#34;https://github.com/SUSE/machinery/issues&#34;&gt;issue&lt;/a&gt;
+and if you have any questions write us to our &lt;a href=&#34;mailto:machinery@lists.suse.com&#34;&gt;mailing
+list&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

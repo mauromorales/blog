@@ -1,7 +1,6 @@
 ---
 title: Test Drive Machinery Using a Docker Container
 date: 2015-09-10
-tags: machinery, docker
 published: true
 featured: 1
 ---

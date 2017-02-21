@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Suse Yes_ship_it on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/suse-yes_ship_it/index.xml</link>
+    <description>Recent content in Suse Yes_ship_it on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/suse-yes_ship_it/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My First Hackweek Was All about Shippping</title>
+      <link>http://mauromorales.com/2015/12/19/my-first-hackweek-was-all-about-shipping/</link>
+      <pubDate>Sat, 19 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/12/19/my-first-hackweek-was-all-about-shipping/</guid>
+      <description>&lt;p&gt;Last week I had the chance to participate in my first &lt;a href=&#34;https://hackweek.suse.com/&#34;&gt;Hackweek&lt;/a&gt;. I never had
+such an experience in any other company I&amp;rsquo;ve ever worked for and between my
+colleagues&amp;rsquo; reports about previous experiences and my own expectations I was
+very excited to see what was all the fuzz about.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;p&gt;These type of events are not unique to SUSE, as a matter of fact Twitter and
+a bunch of other companies were also having their Hackweeks at the same time and
+I&amp;rsquo;m glad this is the case because after having the chance to participate in one
+I realize it&amp;rsquo;s a great way to promote creativity.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A hackweek is basically a week were you get to work on anything you want to
+work on. You are not expected to deliver anything but instead encouraged to
+experiment and explore with anything you think is worth spending time on.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In order to make the most out of Hackweek I decided to join a project and not
+start one of my own so I could do some pairing. This kind of interactions always
+make it a lot of fun for me plus I get to learn a ton.  That&amp;rsquo;s how I joined
+Cornelius Schumacher to work on &lt;a href=&#34;https://github.com/cornelius/yes_ship_it&#34;&gt;Yes Ship It!&lt;/a&gt; This is a project he had
+already started on his own so we were not doing everything from scratch.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The approach of &lt;code&gt;yes_ship_it&lt;/code&gt; is different from the typical release script. It
+doesn&amp;rsquo;t define a series of steps which are executed to make a release. It
+defines a sequence of assertions about the release, which then are checked and
+enforced.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The first thing we decided to do together was a Rails App which allows you to
+track successful software releases. Since it was going to be 100% related to
+&lt;code&gt;Yes Ship It!&lt;/code&gt; we decided to call it &lt;a href=&#34;https://yes-it-shipped.herokuapp.com/&#34;&gt;Yes It Shipped!&lt;/a&gt;. Let me show you how
+trivial it is to add it to a project like the &lt;a href=&#34;https://rubygems.org/gems/formstack-api&#34;&gt;formstack-api gem&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install the &lt;code&gt;yes_ship_it&lt;/code&gt; gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gem install yes_ship_it
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a &lt;code&gt;yes_ship_it.conf&lt;/code&gt; file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yes_ship_it init
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Release!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yes_ship_it
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;By default &lt;code&gt;yes_ship_it&lt;/code&gt; will check if:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;you are in the right release branch (by default master) and the code was
+ pushed.&lt;/li&gt;
+&lt;li&gt;the working directory is not missing to commit anything.&lt;/li&gt;
+&lt;li&gt;the version was update&lt;/li&gt;
+&lt;li&gt;the changelog was updated&lt;/li&gt;
+&lt;li&gt;a tag was added and published&lt;/li&gt;
+&lt;li&gt;a new version of the gem was built and published&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The aim is to make it as generic as possible so you can adapt it to &lt;strong&gt;any&lt;/strong&gt; project you have. For starters you can remmove any check in the process and soon enough you will be able to add checks of your own.&lt;/p&gt;
+
+&lt;p&gt;What I like the most about it is that I can run &lt;code&gt;yes_ship_it&lt;/code&gt; at any time.
+I don&amp;rsquo;t need to remember or make sure what was the last step I did because
+that&amp;rsquo;s exactly what it will do for me.&lt;/p&gt;
+
+&lt;p&gt;What do you think? Leave your comments below and remember to &lt;strong&gt;release early
+and release often&lt;/strong&gt;!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

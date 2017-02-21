@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on mauromorales.com</title>
+    <link>http://mauromorales.com/page/index.xml</link>
+    <description>Recent content in Pages on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <lastBuildDate>Tue, 21 Feb 2017 13:11:55 +0100</lastBuildDate>
+    <atom:link href="http://mauromorales.com/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Me</title>
+      <link>http://mauromorales.com/page/about/</link>
+      <pubDate>Tue, 21 Feb 2017 13:11:55 +0100</pubDate>
+      
+      <guid>http://mauromorales.com/page/about/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://mauromorales.com/img/mauro-morales.jpg&#34; alt=&#34;mauro-morales&#34; style=&#34;float:left; margin: 10px 20px !important&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Hello, I&amp;rsquo;m Mauro.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m a Senior Developer at SUSE working on the CloudFoundry BOSH OpenStack CPI.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>http://mauromorales.com/page/contact/</link>
+      <pubDate>Tue, 21 Feb 2017 13:08:08 +0100</pubDate>
+      
+      <guid>http://mauromorales.com/page/contact/</guid>
+      <description>&lt;p&gt;Hello&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Continuous Delivery Middleman Git Flow Semaphore Ansible Rake on mauromorales.com</title>
+    <link>http://mauromorales.com/tags/continuous-delivery-middleman-git-flow-semaphore-ansible-rake/index.xml</link>
+    <description>Recent content in Continuous Delivery Middleman Git Flow Semaphore Ansible Rake on mauromorales.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Mauro Morales</copyright>
+    <atom:link href="http://mauromorales.com/tags/continuous-delivery-middleman-git-flow-semaphore-ansible-rake/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Getting started with Continuous Delivery</title>
+      <link>http://mauromorales.com/2015/04/02/getting-started-with-continuous-delivery/</link>
+      <pubDate>Thu, 02 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://mauromorales.com/2015/04/02/getting-started-with-continuous-delivery/</guid>
+      <description>
+
+&lt;p&gt;More and more companies are requiring developers to understand Continuous
+Integration and Continuous Delivery but starting to implement it in your
+projects can be a bit overwhelming. Start with a simple website and soon enough
+you will feel more confident to do with more complex projects.&lt;/p&gt;
+
+&lt;p&gt;READMORE&lt;/p&gt;
+
+&lt;h2 id=&#34;the-right-mindset&#34;&gt;The right mindset&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;TDD/BDD, CI/CD, XP, Agile, Scrum &amp;hellip;. Ahhhhh, leave me alone I just want to
+code!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Yes, all this methodologies can be a bit complicated at first, but simply
+because you are not used to them. Like a muscle you need to train them and the
+more you do so, the sooner you won&amp;rsquo;t feel like doing them is a total waste of
+time.&lt;/p&gt;
+
+&lt;p&gt;Once you have made up your mind that CD is for you, your team or your project
+then you will need to define a process and follow it. Don&amp;rsquo;t make it easy to
+break the process and before you know it you and your team will feel like fish
+in the water.&lt;/p&gt;
+
+&lt;h2 id=&#34;automate-a-simple-website-deployment&#34;&gt;Automate a simple website deployment&lt;/h2&gt;
+
+&lt;p&gt;There are many ways you can solve this problem. I will use a certain stack. If
+you don&amp;rsquo;t have experience with any of the tools, try to implement it with one
+you do have experience with.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Stack&lt;/th&gt;
+&lt;th&gt;Tool/Service&lt;/th&gt;
+&lt;th&gt;Alternatives&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;VPS&lt;/td&gt;
+&lt;td&gt;DigitalOcean&lt;/td&gt;
+&lt;td&gt;Linode or Vagrant&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Configuration Management&lt;/td&gt;
+&lt;td&gt;Ansible&lt;/td&gt;
+&lt;td&gt;Chef or Puppet&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Static site generator&lt;/td&gt;
+&lt;td&gt;Middleman&lt;/td&gt;
+&lt;td&gt;Jekyll or pure HTML&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;CI/CD Server&lt;/td&gt;
+&lt;td&gt;Semaphore&lt;/td&gt;
+&lt;td&gt;Codeship or Jenkins&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The first thing is to create a new droplet in DO (you could also do this with
+Ansible but we won&amp;rsquo;t at this tutorial). Make sure there is a &lt;strong&gt;deploy&lt;/strong&gt; user and
+to set up ssh keys for it (again something we could do with Ansible but we&amp;rsquo;ll
+leave that for another post) Setup your your domain to point to the new server&amp;rsquo;s
+IP address, I will use &amp;lsquo;example.com&amp;rsquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;ansible&#34;&gt;Ansible&lt;/h3&gt;
+
+&lt;p&gt;Create a folder for your playbook and inside of it start with a file called
+&lt;code&gt;ansible.cfg&lt;/code&gt;. There we will override the default configuration by pointing to
+a new inventory inside your playbook&amp;rsquo;s folder and specify the deploy user.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[defaults]
+hostfile=inventory
+remote_user=deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now in our &lt;code&gt;inventory&lt;/code&gt; file we specify a group called web and include our
+domain.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[web]
+example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our tasks will be defined in &lt;code&gt;simple-webserver.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;---
+- name: Simple Web Server
+  hosts: example.com
+  sudo: True
+  tasks:
+    - name: Install nginx
+      apt: pkg=nginx state=installed update_cache=true
+      notify: start nginx
+    - name: remove default nginx site
+      file: path=/etc/nginx/sites-enabled/default state=absent
+    - name: Assures project root dir exists
+      file: &amp;gt;
+        path=/srv/www/example.com
+        state=directory
+        owner=deploy
+        group=www-data
+    - name: copy nginx config file
+      template: &amp;gt;
+        src=templates/nginx.conf.j2
+        dest=/etc/nginx/sites-available/example.com
+      notify: restart nginx
+    - name: enable configuration
+      file: &amp;gt;
+        dest=/etc/nginx/sites-enabled/example.com
+        src=/etc/nginx/sites-available/example.com
+        state=link
+      notify: restart nginx
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+    - name: restart nginx
+      service: name=nginx state=restarted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In it we make reference to a template called &lt;code&gt;templates/nginx.conf.j2&lt;/code&gt; where we will
+specify a simple virtual host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;server {
+        listen *:80;
+
+        root /srv/www/example.com;
+        index index.html index.htm;
+
+        server_name example.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I&amp;rsquo;ll show you in another post how to do this same setup but with multiple
+virtual hosts in case you run multiple sites.&lt;/p&gt;
+
+&lt;p&gt;Run it by calling:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ansible-playbook simple-webserver.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;middleman&#34;&gt;Middleman&lt;/h3&gt;
+
+&lt;p&gt;Middleman has a very simple way to deploy over rsync. Just make sure you have
+the following gem in your &lt;code&gt;Gemfile&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;gem &#39;middleman-deploy&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then add something like this to your &lt;code&gt;config.rb&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;activate :deploy do |deploy|
+  deploy.method = :rsync
+  deploy.host   = &#39;example.com&#39;
+  deploy.path   = &#39;/srv/www/example.com&#39;
+  deploy.user  = &#39;deploy&#39;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Before you can deploy you need to remember to build your site. This is prone to
+errors so instead we will add a rake task in our &lt;code&gt;Rakefile&lt;/code&gt; to do this for us.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;desc &#39;Build site&#39;
+task :build do
+  `middleman build`
+end
+
+desc &#39;Deploy site&#39;
+task :deploy do
+  `middleman deploy`
+end
+
+desc &#39;Build and deploy site&#39;
+task :build_deploy =&amp;gt; [:build, :deploy] do
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;git-flow&#34;&gt;Git Flow&lt;/h3&gt;
+
+&lt;p&gt;Technically you don&amp;rsquo;t really need &lt;a href=&#34;https://github.com/nvie/gitflow&#34;&gt;git flow&lt;/a&gt; for this process but I do believe
+having a proper &lt;a href=&#34;http://news.bbc.co.uk/go/rss/-/2/hi/default.stm&#34;&gt;branching model&lt;/a&gt; is key to a successful CD environment.
+Depending on your team&amp;rsquo;s process you might want to use something else but if you
+don&amp;rsquo;t have anything defined please take a look at git flow, it might be just
+what you need.&lt;/p&gt;
+
+&lt;p&gt;For this tutorial I will oversimplify the process and just use the develop,
+master and release branches by following these three steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Commit all the desired changes into the develop branch&lt;/li&gt;
+&lt;li&gt;Create a release and add the release&amp;rsquo;s information&lt;/li&gt;
+&lt;li&gt;Merge the release into master&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let&amp;rsquo;s go through the steps in the command line. We start by adding the new
+features and committing them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git add Rakefile
+git commit -m &#39;Add rake task for easier deployment&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we create a release.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git flow release start &#39;1.0.0&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This would be a good time to test everything out. Bump the version number of
+your software (in my case 1.0.0), update the change log and do any last minute
+fixes.&lt;/p&gt;
+
+&lt;p&gt;Commit the changes and let&amp;rsquo;s wrap up this step by finishing our release.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git flow release finish &#39;1.0.0&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Try to write something significant for your message tag so you can easily refer
+to a version later on by it&amp;rsquo;s description.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;git tag -n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hold your horses and don&amp;rsquo;t push your changes just yet.&lt;/p&gt;
+
+&lt;h3 id=&#34;semaphore&#34;&gt;Semaphore&lt;/h3&gt;
+
+&lt;p&gt;Add a new project from Github or Bitbucket.&lt;/p&gt;
+
+&lt;p&gt;For the build you might want to have something along the lines of:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;bundle install --path vendor/bundle
+bundle exec rake spec
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now go into the projects settings inside the &lt;em&gt;Deployment&lt;/em&gt; tab and add a server.&lt;/p&gt;
+
+&lt;p&gt;Because we are using a generic option Sempahore will need access to our server.
+Generate an SSH key and paste the private in Semaphore and the public in your
+server.&lt;/p&gt;
+
+&lt;p&gt;For the deploy commands you need to have something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh-keyscan -H -p 22 example.com &amp;gt;&amp;gt; ~/.ssh/known_hosts
+bundle exec rake build_deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;push-your-changes&#34;&gt;Push your changes&lt;/h3&gt;
+
+&lt;p&gt;Push your changes in the master branch and voilà, Semaphore will build and
+deploy your site.&lt;/p&gt;
+
+&lt;p&gt;Once you get into the habit of doing this with your website you will feel more
+confident of doing it with something like a Rails application.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions please leave them below, I&amp;rsquo;ll respond to every single
+one of them.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

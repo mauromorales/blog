@@ -1,7 +1,6 @@
 ---
 title: Ally Skills Workshop Review
 date: 2015-10-08
-tags: women in tech
 published: true
 ---
 

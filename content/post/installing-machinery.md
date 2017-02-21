@@ -1,7 +1,6 @@
 ---
 title: Installing Machinery
 date: 2015-08-11
-tags: machinery, opensuse
 published: true
 featured: 4
 ---
