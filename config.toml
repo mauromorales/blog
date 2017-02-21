@@ -1,0 +1,56 @@
+languageCode = "en-us"
+title = "mauromorales.com"
+baseURL = "http://mauromorales.com/"
+
+theme = "ghostwriter"
+copyright = "Mauro Morales"
+googleAnalytics = "UA-10123298-1"
+disqusShortname = "mauromoralesdotcom"
+
+[Author]
+    name = "Mauro Morales"
+    profile = "https://google.com/+XXX"
+
+[Taxonomies]
+    tag = "tags"
+
+[Params]
+    intro = true
+    headline = "Mauro Morales' Blog"
+    description = "Archives"
+    github = "https://github.com/mauromorales"
+    gitlab = "https://gitlab.com/mauromorales"
+    linkedin = "https://linkedin.com/in/mauromorales/"
+    #gplus = "https://google.com/+XXX"
+    twitter = "https://twitter.com/_mauromorales"
+    #stackoverflow = "https://stackoverflow.com/users/XXX/YYY"
+    email = "contact@mauromorales.com"
+    opengraph = true
+    shareTwitter = true
+    shareFacebook = true
+    shareGooglePlus = true
+    shareLinkedIn = true
+    dateFormat = "Mon, Jan 2, 2006"
+
+[Permalinks]
+    post = "/:year/:month/:day/:filename/"
+
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Projects"
+    url = "/project/"
+    weight = 2
+
+[[menu.main]]
+    name = "Contact"
+    url = "/page/contact/"
+    weight = 3
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 4
