@@ -11,4 +11,7 @@ title = "About Me"
 
 Hello, I'm Mauro.
 
-I'm a Senior Developer at SUSE working on the CloudFoundry BOSH OpenStack CPI.
+I'm a Senior Developer at [SUSE][SUSE] working on Cloud Foundry's [BOSH OpenStack CPI][CPI].
+
+[SUSE]: https://www.suse.com/
+[CPI]: https://github.com/cloudfoundry-incubator/bosh-openstack-cpi-release
