@@ -1,0 +1,60 @@
+==================================================================
+https://keybase.io/mauromorales
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://mauromorales.com
+  * I am mauromorales (https://keybase.io/mauromorales) on keybase.
+  * I have a public key ASDuKTIhMccNrxlM8khD9-CQGUbPNenJGRBAoz_RtHPxNwo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0120ee29322131c70daf194cf24843f7e0901946cf35e9c9191040a33fd1b473f1370a",
+            "host": "keybase.io",
+            "kid": "0120ee29322131c70daf194cf24843f7e0901946cf35e9c9191040a33fd1b473f1370a",
+            "uid": "48d0d62b08c5f9f9f0903d6bfa94c419",
+            "username": "mauromorales"
+        },
+        "service": {
+            "hostname": "mauromorales.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.16"
+    },
+    "ctime": 1467382952,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1467382686,
+        "hash": "66bc4f1fde4f700a5299bc41fe8c132f47e6b46c6c3e254e698b9753d2077bafef4ea6d4a657057e8ee13c812016fad13c384c716dc64b5398e88830ac3395e9",
+        "seqno": 505821
+    },
+    "prev": "0b7da8a0a965c96bcfb9721a9ec3f1da0a4c2393e855bd92add32a2e1f09c115",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+g6Rib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg7ikyITHHDa8ZTPJIQ/fgkBlGzzXpyRkQQKM/0bRz8TcKp3BheWxvYWTFAvx7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZWUyOTMyMjEzMWM3MGRhZjE5NGNmMjQ4NDNmN2
+UwOTAxOTQ2Y2YzNWU5YzkxOTEwNDBhMzNmZDFiNDczZjEzNzBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZWUyOTMyMjEzMWM3MGRhZjE5NGNmMjQ4NDNmN2UwOTAxOTQ2Y2YzNWU5YzkxOTEwNDBhMzNmZDFiNDczZjEzNzBhIiwidWlk
+IjoiNDhkMGQ2MmIwOGM1ZjlmOWYwOTAzZDZiZmE5NGM0MTkiLCJ1c2VybmFtZSI6Im1hdXJvbW9yYWxlcyJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoibWF1cm9tb3JhbGVzLmNvbSIsInByb3RvY29sIjoiaHR0cDoifSwidHlwZSI6IndlYl9zZXJ2aW
+NlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMTYifSwiY3RpbWUiOjE0NjczODI5NTIsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJtZXJrbGVfcm9vdCI6eyJj
+dGltZSI6MTQ2NzM4MjY4NiwiaGFzaCI6IjY2YmM0ZjFmZGU0ZjcwMGE1Mjk5YmM0MWZlOGMxMzJmNDdlNmI0NmM2YzNlMjU0ZTY5OGI5NzUzZDIwNzdiYWZlZjRlYTZkNGE2NTcwNTdlOGVlMTNjODEyMDE2ZmFkMTNjMzg0YzcxNmRjNjRiNTM5OGU4OD
+gzMGFjMzM5NWU5Iiwic2Vxbm8iOjUwNTgyMX0sInByZXYiOiIwYjdkYThhMGE5NjVjOTZiY2ZiOTcyMWE5ZWMzZjFkYTBhNGMyMzkzZTg1NWJkOTJhZGQzMmEyZTFmMDljMTE1Iiwic2Vxbm8iOjEwLCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQJYn8pe8
+DCZq49iC2Vb3YAdT+Q+TcAawSMJwKz9MeGNuWrYbKSYT4XrOVabIDjVYqFXiQni1fvutHQtOsbPCqQKoc2lnX3R5cGUgo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mauromorales
+
+==================================================================
